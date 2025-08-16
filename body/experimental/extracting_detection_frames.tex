@@ -1,14 +1,46 @@
-\subsection{Detection Frame Extraction}
+\subsection{Detection Frame Preparation}
 
-\subsubsection{Frame Identification}
+Detection frame preparation is the process whereby the raw camera trap video of the dataset
+is transformed into an array of representative images depicting the chimpanzees whose
+distances to the camera will be estimated.
+Two distinct frame sampling techniques were used in this study which will be referred to as
+'manual' and 'automated' sampling.
 
-\textbf{2.2.1.1~~~~Manual Sample}\vspace{5mm}\\
-Converting date/time from csv to a timestamp for each video
+\vspace{-3mm}
 
-\vspace{5mm}
+\subsubsection{Sampling}
 
-\textbf{2.2.1.2~~~~Automated Sample}\vspace{5mm}\\
+\textbf{2.2.1.1~~~~Manual Sample}\vspace{4.5mm}\\
+Accompanying the raw camera trap video, another component of the dataset is a list of
+human-annotated distance-to-camera estimates for all observed chimpanzees at a recorded
+date and time along with additional metadata.
+These distance data must be used a benchmark by which the accuracy of any modelled estimates
+are assessed.
+
+Before sampling, these data were first cleaned by running an automated script to flag any
+identifiable abnormalities in the data such as duplicate entries and inconsistencies in the
+date/time formatting.
+These were then manually corrected.
+
+In order to identify the correct frames to extract, each of the manual annotations was assigned
+a timestamp corresponding to a time in seconds in which it was recorded in its associated camera
+trap video.
+These timestamps then constituted discreet identifiers of sampled frames.
+
+Although the start-date/times of the videos were not explicitly labelled, assigning timestamps was
+still possible since the date/time at zero seconds into a given video can be inferred as equal
+to that of the earliest of all recorded annotations associated with the video.
+This was a valid assumption to make as the overwhelming majority of videos begin exactly at the
+point in which a chimpanzee enters the frame, thus corresponding to the first annotated observation.
+In the few rare cases where this heuristic does not apply, all relevant timestamps were manually
+corrected upon being flagged.
+
+\vspace{3mm}
+
+\textbf{2.2.1.2~~~~Automated Sample}\vspace{4.5mm}\\
 Extracting frames from all videos sampled every 2 seconds
+
+\vspace{-2.5mm}
 
 \subsubsection{Frame Extraction}
 python script to extract based on timestamps
