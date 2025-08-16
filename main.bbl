@@ -29,4 +29,8 @@ T.~Haucke, H.~S. Kühl, J.~Hoyer, and V.~Steinhage, ``Overcoming the distance
   \url{https://www.sciencedirect.com/science/article/pii/S1574954121003277}
 \BIBentrySTDinterwordspacing
 
+\bibitem{YOLO}
+R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
+  features of the popular object detector,'' 07 2024.
+
 \end{thebibliography}

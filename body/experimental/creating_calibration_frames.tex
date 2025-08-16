@@ -29,7 +29,61 @@ a filename in an input bar.
 
 \clearpage
 
-The
-
 \subsubsection{Frame Mask Creation}
-Mask creation using GIMP, potential use of segment anything
+
+For each of the extracted calibration frames, a corresponding binary mask was created.
+This task can be completed manually using image manipulation software (e.g.\ Photoshop,
+GIMP, etc\ldots) where the segmentation boundary is manually traced then filled.
+This approach, however, is rather labour-intensive, constituting somewhat
+of a bottleneck, and therefore it is desirable to automate the process.
+
+To assess the feasibility of automation, a two-stage detection/segmentation pipeline was
+created.
+Here, raw calibration frames are first processed with YOLOv5 detector\cite{YOLO} to
+generate bounding boxes enclosing the frame landmarks.
+The bounding boxes are then passed to Segment Anything Model which predicts segmentation
+masks for the landmarks.
+
+Two examples of the raw calibration frames (Figure~\ref{fig:raw_frames}) along with their
+corresponding manual (Figure~\ref{fig:manual_masks}) and automated (Figure~\ref{fig:sam_masks})
+masks are shown below.
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_blurred}%
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far}%
+    }
+    \caption{Raw calibration frames}
+    \label{fig:raw_frames}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_manual_mask}%
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_manual_mask}%
+    }
+    \caption{Manual calibration frame masks}
+    \label{fig:manual_masks}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_sam_mask}%
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_sam_mask}%
+    }
+    \caption{Automated calibration frame masks}
+    \label{fig:sam_masks}
+\end{figure}
+
+
+
+
