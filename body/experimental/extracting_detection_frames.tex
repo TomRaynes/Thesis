@@ -13,9 +13,10 @@ Two distinct frame sampling techniques were used in this study which will be ref
 \textbf{2.2.1.1~~~~Manual Sample}\vspace{4.5mm}\\
 Accompanying the raw camera trap video, another component of the dataset is a list of
 human-annotated distance-to-camera estimates for all observed chimpanzees at a recorded
-date and time along with additional metadata.
+date and time (along with additional metadata).
 These distance data must be used a benchmark by which the accuracy of any modelled estimates
-are assessed.
+are assessed and therefore the specific frames corresponding to these manual annotations must
+be sampled.
 
 Before sampling, these data were first cleaned by running an automated script to flag any
 identifiable abnormalities in the data such as duplicate entries and inconsistencies in the
@@ -27,18 +28,37 @@ a timestamp corresponding to a time in seconds in which it was recorded in its a
 trap video.
 These timestamps then constituted discreet identifiers of sampled frames.
 
-Although the start-date/times of the videos were not explicitly labelled, assigning timestamps was
-still possible since the date/time at zero seconds into a given video can be inferred as equal
-to that of the earliest of all recorded annotations associated with the video.
+Although the start-date/times of the videos themselves were not explicitly pre-labelled within
+the dataset, assigning timestamps was still possible since the date/time at zero seconds into
+a given video can be inferred as equal to that of the earliest of all recorded annotations
+associated with the video.
 This was a valid assumption to make as the overwhelming majority of videos begin exactly at the
 point in which a chimpanzee enters the frame, thus corresponding to the first annotated observation.
-In the few rare cases where this heuristic does not apply, all relevant timestamps were manually
+In the few rare cases where this heuristic did not apply, all relevant timestamps were manually
 corrected upon being flagged.
 
 \vspace{3mm}
 
 \textbf{2.2.1.2~~~~Automated Sample}\vspace{4.5mm}\\
-Extracting frames from all videos sampled every 2 seconds
+The automated sampling process is significantly more straightforward.
+Here, detection frames are sampled at an interval of two seconds over all camera trap video in
+the dataset.
+Resultant model-estimated distances from this sample are intended to be used purely as distance
+data for the automated modelling of population abundance.
+
+In contrast to the manual sample, this automated sample is not directly associated with any
+human-annotated distance estimates.
+It does, however, remain representative of the dataset, capturing images of the same individual
+chimpanzees over the same time period.
+This sample also differs due to the sampling of many 'empty' frames where the image captures no
+individual.
+The impact of these empty frames on subsequent abundance estimates will be minimal.
+The empty frames may collectively incur a small number of false positive detections; however,
+the total will be negligible and the probability of a given empty frame resulting in a false
+positive detection is no more likely than that of any other frame.
+
+All in all, this approach exemplifies a simple frame sampling method that can be used as part of
+an automated distance sampling pipeline.
 
 \vspace{-2.5mm}
 
