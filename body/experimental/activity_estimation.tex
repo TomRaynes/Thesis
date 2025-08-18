@@ -63,5 +63,11 @@ camera trap video.
 A script was then run to join each of the modelled distances with the video metadata
 on video name which gave a formatted dataframe holding entirely model estimated distances.
 
+\subsubsection{Running Activity Script}
 
-\subsubsection{Script}
+With the distance data and associated metadata now appropriately formatted, density
+and abundance estimates were then developed using the activity script.
+For each dataframe, the script was adapted to apply appropriate truncation and binning
+to the distance data in order to generate a smooth probability density histogram.
+Preliminary runs of the script were then used to fit several detection functions to
+this histogram, with the best fitting (lowest AIC value) being selected.
