@@ -1,3 +1,38 @@
 \subsection{Activity Estimation}
 
-Using the computed distance estimates from the previous section,
+Using the computed distance estimates from the previous section, chimpanzee population
+density and abundance was estimated.
+Estimates were calculated for each of the detector/depth model combinations using a
+script adapted from one supplied with the dataset.
+
+\subsubsection{Formatting}
+
+For the distance data to be used for density and abundance estimation, it first must be
+formatted and joined with the relevant location and camera trap video metadata as to
+satisfy the script's input requirements.
+The final formatting must then be identical in structure to the manually annotated
+detection data supplied with the dataset.
+
+\vspace{3mm}
+
+\textbf{3.4.1.1~~~~Manual Sample}\vspace{4.5mm}\\
+When formatting the distance data generated from the manual sample, the goal was to
+overwrite each of the manually annotated distances (in original supplied dataframe)
+with the corresponding model estimated distances, leaving all other data unchanged.
+
+For reasons detailed in Section~\ref{subsubsec:distance_comparison}, a decision was
+made to format the data such as to only overwrite manual distances associated with
+frames capturing a single chimpanzee.
+This gives a 'supplemented' dataframe, where distance estimates originating from
+single-chimp frames are model-estimated while those from multi-chimp frames are estimated
+manually.
+Nevertheless, density and abundance estimates based on supplemented data are still
+informative and give insight into the effectiveness and accuracy of using model estimated
+distance data in this context.
+
+\vspace{3mm}
+
+\textbf{3.4.1.2~~~~Automated Sample}\vspace{4.5mm}\\
+When formatting the distance data generated from the automated sample
+
+\subsubsection{Script}
