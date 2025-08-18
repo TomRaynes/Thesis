@@ -10,8 +10,31 @@ script adapted from one supplied with the dataset.
 For the distance data to be used for density and abundance estimation, it first must be
 formatted and joined with the relevant location and camera trap video metadata as to
 satisfy the script's input requirements.
-The final formatting must then be identical in structure to the manually annotated
-detection data supplied with the dataset.
+The final must then be identical in structure to the manually annotated
+detection data supplied with the dataset in CSV formatting containing the columns
+'video\_name', 'time\_in\_place\_(days)', 'effort', 'starting\_date', 'date\_observation',
+'time\_observation', 'year', 'month', 'day', 'hour', 'minute', 'second', 'distance', 'Sample.Label',
+'Effort', 'Region.Label' and 'Area'.
+
+%\begin{itemize}\setlength{\itemsep}{-8pt}
+%    \item video\_name
+%    \item time\_in\_place\_(days)
+%    \item effort
+%    \item starting\_date
+%    \item date\_observation
+%    \item time\_observation
+%    \item year
+%    \item month
+%    \item day
+%    \item hour
+%    \item minute
+%    \item second
+%    \item distance
+%    \item Sample.Label
+%    \item Effort
+%    \item Region.Label
+%    \item Area
+%\end{itemize}
 
 \vspace{3mm}
 
@@ -23,9 +46,9 @@ with the corresponding model estimated distances, leaving all other data unchang
 For reasons detailed in Section~\ref{subsubsec:distance_comparison}, a decision was
 made to format the data such as to only overwrite manual distances associated with
 frames capturing a single chimpanzee.
-This gives a 'supplemented' dataframe, where distance estimates originating from
-single-chimp frames are model-estimated while those from multi-chimp frames are estimated
-manually.
+This gave a 'supplemented' dataframe, where distance estimates originating from
+single-chimp frames were model-estimated while those from multi-chimp frames were
+estimated manually.
 Nevertheless, density and abundance estimates based on supplemented data are still
 informative and give insight into the effectiveness and accuracy of using model estimated
 distance data in this context.
@@ -33,6 +56,12 @@ distance data in this context.
 \vspace{3mm}
 
 \textbf{3.4.1.2~~~~Automated Sample}\vspace{4.5mm}\\
-When formatting the distance data generated from the automated sample
+When formatting the distance data generated from the automated sample however, a
+different method was used.
+First, a lookup table was created to hold the metadata associated with each specific
+camera trap video.
+A script was then run to join each of the modelled distances with the video metadata
+on video name which gave a formatted dataframe holding entirely model estimated distances.
+
 
 \subsubsection{Script}
