@@ -44,9 +44,13 @@ estimate of the pixel corresponding to the centre-most point of the segmentation
 that is furthest from the segmentation boundary).
 
 Additionally, all runs using the segmentation detection method were parameterised with the
-'mask animals' flag.
-This has the effect of, during the calibration stage, using only pixels defined with the calibration
-frame masks to fit the regression curve and calculate the calibration correction function.
+'calibration mask animals' flag.
+This has the following effect:
+During the detection calibration alignment where the scale of the furthest calibration frame reference
+target is transferred to the detection frame, only the pixels inside the animal segmentation boundary
+(rather than the entire bounding box) are excluded.
+This is most impactful at very close detection distances where the animal occupies a significantly
+large area of the frame, allowing for a more accurate alignment to be achieved.
 
 \clearpage
 

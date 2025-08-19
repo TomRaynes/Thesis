@@ -29,7 +29,7 @@ a filename in an input bar.
 
 \clearpage
 
-\subsubsection{Frame Mask Creation}
+\subsubsection{Frame Mask Creation}\label{subsubsec:mask_creation}
 
 For each of the extracted calibration frames, a corresponding binary mask was created.
 This task can be completed manually using image manipulation software (e.g.\ Photoshop,
@@ -44,6 +44,8 @@ generate bounding boxes enclosing the frame landmarks.
 The bounding boxes are then passed to Segment Anything Model which predicts segmentation
 masks for the landmarks.
 
+The efficacy of this automated method of calibration frame mask generation was tested on
+several raw calibration frames.
 Two examples of the raw calibration frames (Figure~\ref{fig:raw_frames}) along with their
 corresponding manual (Figure~\ref{fig:manual_masks}) and automated (Figure~\ref{fig:sam_masks})
 masks are shown below.
