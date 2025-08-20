@@ -40,7 +40,7 @@ of a bottleneck, and therefore it is desirable to automate the process.
 To assess the feasibility of automation, a two-stage detection/segmentation pipeline was
 created.
 Here, raw calibration frames are first processed with YOLOv5 detector\cite{YOLO} to
-generate bounding boxes enclosing the frame landmarks.
+generate bounding boxes (prompted to detect humans) enclosing the frame landmarks.
 The bounding boxes are then passed to Segment Anything Model which predicts segmentation
 masks for the landmarks.
 
