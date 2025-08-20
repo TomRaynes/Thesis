@@ -5,7 +5,7 @@
 In this section, the precision and accuracy of the distance estimates generated using the
 four configurations of the distance estimation pipeline (outlined in
 Section~\ref{subsubsec:configuratons}) are evaluated.
-In order to for these data to be analysed, the estimates are benchmarked against their
+In order for these data to be analysed, the estimates are benchmarked against their
 corresponding manual distance estimates (supplied with the dataset), thus these estimates
 use detection frames originating from the manual sample (Section~\ref{subsubsec:sampling}).
 
@@ -20,62 +20,97 @@ outside the scope of this project.
 As a result, this analysis focuses on distance comparisons associated with frames capturing
 only a single individual.
 
-\begin{figure}[htbp]
-    \centering
-    \vspace{1cm}
-    \includegraphics[width=1.01\textwidth]{body/analysis/assets/distance_graphs/averages3}
-    \caption{Distance Comparison}
-    \label{fig:distance_comparison}
-\end{figure}
+Upon joining the modelled distance estimates to their corresponding manual estimates, the
+overall errors of each of the four pipeline configurations were calculated.
+Table~\ref{tab:overall_errors} shows the mean average error, root mean squared error,
+average difference (i.e., mean($model_i$ - $manual_i$)) and the result of a statistical
+difference test (i.e., where p-value < 0.05).
+To note, while both the mean average and root mean squared errors give a measure of the
+absolute error of the configurations, the average difference does not and is affected by
+cancellation between overestimates and underestimates.
+Therefore, it is used as a metric to assess whether a given configuration over or
+under-predicts relative to the manual distance estimation method, where a positive value
+indicates over-prediction while a negative value indicates under-prediction.
 
-\clearpage
+The modelled distance estimates were then grouped by their corresponding manual estimates (i.e.,
+0.5 m, 1.0 m, \ldots 15 m).
+Figure~\ref{fig:distance_comparison} shows the averages of the modelled estimates for each
+group while Figure~\ref{fig:spread_comparison} shows each individual modelled estimate for
+each group, giving a visualisation of the spread of the estimates.
+These individual errors for each of these groups were then calculated.
+Figure~\ref{fig:mae} show the change in mean average error for each group while
+Figure~\ref{fig:rmse} shows the change in root mean squared error for each group.
 
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=1.01\textwidth]{body/analysis/assets/distance_graphs/spread}
-    \caption{Spread Comparison}
-    \label{fig:spread_comparison}
-\end{figure}
-
-How does parameterisation affect the estimates
-
-\clearpage
-
-\subsubsection{Error Analysis}
+\vspace{1cm}
 
 \begin{table}[htbp]
     \centering
-    \caption{Errors}
-    \label{tab:distances}
+    \caption{Mean average error (MAE), root mean squared error (RMSE), average difference between
+    model and manual estimate ($\Delta_{average}$) and result of Wilcoxon signed rank test for
+    statistical difference. These data describe all distance estimates for each pipeline
+    configuration collectivelly.)}
+    \label{tab:overall_errors}
     \begin{tabular}{ccccc}
-        \textbf{Method} & \textbf{$\Delta_{average}$ / m} & \textbf{MAE / m} & \textbf{RMSE / m}
+        \textbf{Method} & \textbf{MAE / m} & \textbf{RMSE / m} & \textbf{$\Delta_{average}$ / m}
         & \textbf{Statistical Difference} \\
         \midrule
-        DPT, BBOX & 0.586 & 1.81 & 2.66 & YES \\
-        DPT, SEG  & 0.836 & 1.70 & 2.45 & YES \\
-        DA, BBOX  & 1.49  & 2.03 & 2.62 & YES \\
-        DA, SEG   & 2.80  & 3.00 & 3.52 & YES \\
+        DPT, BBOX & 1.81 & 2.66 & 0.586 & YES \\
+        DPT, SEG  & 1.70 & 2.45 & 0.836 & YES \\
+        DA, BBOX  & 2.03 & 2.62 & 1.49  & YES \\
+        DA, SEG   & 3.00 & 3.52 & 2.80  & YES \\
     \end{tabular}
 \end{table}
 
 \clearpage
 
-\begin{figure}[H]
+\begin{figure}[p]
     \centering
-    \includegraphics[width=1.01\textwidth]{body/analysis/assets/errors/MAE}
-    \caption{Mean Average Error}
-    \label{fig:mae}
+    \vspace{1cm}
+    \includegraphics[width=1.01\textwidth]{body/analysis/assets/distance_graphs/averages}
+    \caption{Graphs showing mean modelled distance estimates mapped to thier corresponding manual
+    estimates for the configurations: DPT/bounding box (top-left), DPT/segmentation (top-right),
+        DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The blue dotted line
+        shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
+        the error bars show the 25–75 (green) and 5–95 (purple) percentiles.}
+    \label{fig:distance_comparison}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[p]
     \centering
+    \includegraphics[width=1.01\textwidth]{body/analysis/assets/distance_graphs/spread}
+    \caption{Graphs showing all modelled distance estimates mapped to thier corresponding manual
+        estimates for the configurations: DPT/bounding box (top-left), DPT/segmentation (top-right),
+        DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The red dashed line shows
+        the ideal (i.e., model=manual).}
+    \label{fig:spread_comparison}
+\end{figure}
+
+\clearpage
+
+%\subsubsection{Error Analysis}
+
+\begin{figure}[H]
+    \vspace{1cm}
+    \centering
+    \includegraphics[width=1.01\textwidth]{body/analysis/assets/errors/MAE}
+    \caption{Mean average error for distance estimates grouped by their corresponding manual
+    estimates for each pipeline configuration.}
+    \label{fig:mae}
+
+    \vspace{2cm}
+
     \includegraphics[width=1.01\textwidth]{body/analysis/assets/errors/RMSE}
-    \caption{Root Mean Squared Error}
+    \caption{Root mean squared error for distance estimates grouped by their corresponding manual
+    estimates for each pipeline configuration.}
     \label{fig:rmse}
 \end{figure}
 
 \clearpage
 
+For all configurations, it can be seen that there is a spread range of estimated distances
+within the groups.
+
+\clearpage
 
 \subsubsection{Qualitative Analysis}
 depth map diagrams
