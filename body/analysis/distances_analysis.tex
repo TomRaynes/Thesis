@@ -107,8 +107,40 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
 
 \clearpage
 
-For all configurations, it can be seen that there is a spread range of estimated distances
+For all configurations, it is seen that there is a spread range of estimated distances
 within the groups.
+Contrasting the distance estimates of the two detection method using DPT distance estimation,
+an increase in both accuracy and precision is observed for the segmentation method compared
+to the bounding box method at close distances (i.e., < 2 meters).
+For modelled distances corresponding to manual estimates of 0.5 meters, the bounding box
+method gives a MAE of 5.74 meters, a RMSE of 7.17 meters and an interquartile range of 7.50
+meters while the segmentation method gives a MAE of 1.98 meters, a RMSE of 3.27 meters and
+and interquartile range of 1.61 meters.
+This is explained by a better detection frame calibration alignment.
+Here, only the detection frame pixels defined by the chimpanzee segmentation are masked as
+opposed to those within the entire bounding box.
+As a result, more pixels corresponding to the transect background which are common to both
+the calibration and detection frames are available for depth scale alignment, leading to a
+superior calibration of the detection frame depth scale.
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_bbox}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_seg}
+    }
+    \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
+        (bottom) detection methods at a detection distance of 0.5 meters (manual estimate)}
+    \label{fig:bbox_vs_seg_close}
+\end{figure}
+
+This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_close}, where the bounding box
+method results in an effectively failed calibration while the segmentation method succeeds.
+In this example, the bounding box method estimates a distance of 15.0 meters whereas the
+segmentation method estimates 1.0 meters.
+
 
 \clearpage
 
