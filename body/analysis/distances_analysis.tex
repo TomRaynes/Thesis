@@ -168,7 +168,8 @@ final detection distance calculation at medium to long distances when using the 
 With this particular dataset, it is from these medium distances where detections start to become
 occluded by foliage.
 When the bounding box method is used, the final distance can be biased towards a lower estimate in
-circumstances where a significantly large portion of the bounding box is composed of occluding pixels.
+circumstances where a significantly large portion of the bounding box is composed of occluding pixels
+that correspond to a significantly shorter distance.
 Conversely, a high quality segmentation often avoids this.
 This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_occluded}.
 
@@ -212,7 +213,6 @@ than the individual.
 \end{figure}
 
 
-
 Blurry detections frames
 
 djou09
@@ -222,14 +222,12 @@ djou09
 
 If the two distance estimation models (DPT and DA) are compared
 
+\vspace{5mm}
+\textbf{Summary}
 
-
-
+Explain results in errors table
+Sweet spot
 
 \clearpage
-
-\subsubsection{Qualitative Analysis}
-depth map diagrams
-close/far failure cases, sweet spot
 
 \subsubsection{Effects of Varying Calibration}
