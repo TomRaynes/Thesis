@@ -107,21 +107,24 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
 
 \clearpage
 
-For all configurations, it is seen that there is a spread range of estimated distances
-within the groups.
+\textbf{Detection Method Effects}
+
 Contrasting the distance estimates of the two detection method using DPT distance estimation,
 an increase in both accuracy and precision is observed for the segmentation method compared
 to the bounding box method at close distances (i.e., < 2 meters).
 For modelled distances corresponding to manual estimates of 0.5 meters, the bounding box
 method gives a MAE of 5.74 meters, a RMSE of 7.17 meters and an interquartile range of 7.50
 meters while the segmentation method gives a MAE of 1.98 meters, a RMSE of 3.27 meters and
-and interquartile range of 1.61 meters.
+an interquartile range of 1.61 meters.
 This is explained by a better detection frame calibration alignment.
 Here, only the detection frame pixels defined by the chimpanzee segmentation are masked as
 opposed to those within the entire bounding box.
 As a result, more pixels corresponding to the transect background which are common to both
 the calibration and detection frames are available for depth scale alignment, leading to a
 superior calibration of the detection frame depth scale.
+
+This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_close}, where the bounding box
+method results in an effectively failed calibration while the segmentation method succeeds.
 
 \begin{figure}[htbp]
     \centering
@@ -132,14 +135,95 @@ superior calibration of the detection frame depth scale.
         \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_seg}
     }
     \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
-        (bottom) detection methods at a detection distance of 0.5 meters (manual estimate)}
+        (bottom) detection methods at a detection distance of 0.5 meters (manual estimate).
+        In this example, the bounding box method gives a distance estimate of 15.0 meters
+        while the segmentation method gives a distance estimate of 1.0 meters}
     \label{fig:bbox_vs_seg_close}
 \end{figure}
 
-This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_close}, where the bounding box
-method results in an effectively failed calibration while the segmentation method succeeds.
-In this example, the bounding box method estimates a distance of 15.0 meters whereas the
-segmentation method estimates 1.0 meters.
+In contrast, this detection effect does not apply when Depth Anything is used to estimate
+distance.
+No significant difference is observed in the accuracy and/or precision of the distance
+estimates obtained using the two detection methods.
+For modelled distances corresponding to manual estimates of 0.5 meters, the bounding box
+method gives a MAE of 4.06 meters, a RMSE of 4.19 meters and an interquartile range of 0.95
+meters while the segmentation method gives a MAE of 4.35 meters, a RMSE of 4.60 meters and
+an interquartile range of 0.80 meters.
+This is an expected result given that Depth Anything is a metric depth model.
+Unlike with DPT, the scale of the generated depth maps are not aligned to that of the reference
+frames meaning that the detection method does not influence this scale.
+Therefore, it can be inferred that the difference in distance estimates given by these detection
+methods is a result of the different pixel sampling techniques used to calculate the final distance
+estimate (i.e., bounding box depth from the pixel corresponding to the 20th percentile depth
+and segmentation depth from the depth of the centre-most pixel) rather than differences on depth
+scaling.
+
+Upon inspection of Figure~\ref{fig:distance_comparison}, it can be seen that for both DPT and Depth
+Anything models, the gradients of the regression lines (correlating the averages of the binned
+distance estimates with the corresponding manual estimates) of the segmentation detection methods
+are higher relative to their corresponding bounding box regression gradient and also better
+correlated to the ideal.
+A possible explanation for this trend is a minimised contribution of occluding pixels during the
+final detection distance calculation at medium to long distances when using the segmentation method.
+With this particular dataset, it is from these medium distances where detections start to become
+occluded by foliage.
+When the bounding box method is used, the final distance can be biased towards a lower estimate in
+circumstances where a significantly large portion of the bounding box is composed of occluding pixels.
+Conversely, a high quality segmentation often avoids this.
+This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_occluded}.
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_bbox}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_seg}
+    }
+    \caption{Example of depth maps generated using bounding box (top) and segmentation
+        (bottom) detection methods at a detection distance of 6.5 meters (manual estimate)
+        where the detected individual is partially occluded by foliage. Here, the bounding
+        box method gave a distance estimate of 4.40 meters while the segmentation method
+        gave a distance estimate of 6.96 meters.}
+    \label{fig:bbox_vs_seg_occluded}
+\end{figure}
+
+If, however, the quality of the segmentation is poor, the distances of occluded detections
+may still be underestimated.
+Figure~\ref{fig:haze_occluded} highlights a scenario where an individual was correctly detected
+but, due to poor detection frame quality, the occluding foliage was instead segmented rather
+than the individual.
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_haze_bbox}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_haze_seg}
+    }
+    \caption{Example of depth maps generated using bounding box (top) and segmentation
+        (bottom) detection methods at a detection distance of 4.5 meters (manual estimate)
+        where the detected individual is partially occluded by foliage. Here, moisture on the
+        camera lense has resulted in a slightly hazy image, leading to a failed segmentation
+        of the detected individual. The bounding box method gave an estimated distance of
+        2.64 meters while the segmentation method gave a distance estimate of 2.56 meters.}
+    \label{fig:haze_occluded}
+\end{figure}
+
+
+
+Blurry detections frames
+
+djou09
+
+\vspace{5mm}
+\textbf{Depth Model Effects}
+
+If the two distance estimation models (DPT and DA) are compared
+
+
+
 
 
 \clearpage
