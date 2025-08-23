@@ -37,6 +37,9 @@ The modelled distance estimates were then grouped by their corresponding manual 
 Figure~\ref{fig:distance_comparison} shows the averages of the modelled estimates for each
 group while Figure~\ref{fig:spread_comparison} shows each individual modelled estimate for
 each group, giving a visualisation of the spread of the estimates.
+Table~\ref{tab:regression_gradients} shows the gradients of the fitted regression lines
+correlating the averages of all grouped distance estimates with their corresponding manual
+distance estimate for each configuration.
 These individual errors for each of these groups were then calculated.
 Figure~\ref{fig:mae} show the change in mean average error for each group while
 Figure~\ref{fig:rmse} shows the change in root mean squared error for each group.
@@ -63,7 +66,7 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
 
 \clearpage
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
     \vspace{1cm}
     \includegraphics[width=1.01\textwidth]{body/analysis/assets/distance_graphs/averages}
@@ -71,9 +74,28 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     estimates for the configurations: DPT/bounding box (top-left), DPT/segmentation (top-right),
         DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The blue dotted line
         shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
-        the error bars show the 25–75 (green) and 5–95 (purple) percentiles.}
+        the error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
+        units of meters.}
     \label{fig:distance_comparison}
 \end{figure}
+
+\vspace{1cm}
+
+\begin{table}[H]
+    \centering
+    \caption{Gradients of the regression lines (blue dotted lines in Figure~\ref{fig:distance_comparison})
+        correlating the averages of all binned distance estimates with their corresponding manual distance
+        estimate for each configuration.}
+    \label{tab:regression_gradients}
+    \begin{tabular}{cc}
+        \textbf{Method} & \textbf{Regression Gradient}\\
+        \midrule
+        DPT, BBOX & 0.59 \\
+        DPT, SEG  & 0.84 \\
+        DA, BBOX  & 0.49 \\
+        DA, SEG   & 0.80 \\
+    \end{tabular}
+\end{table}
 
 \begin{figure}[p]
     \centering
@@ -81,13 +103,11 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     \caption{Graphs showing all modelled distance estimates mapped to thier corresponding manual
         estimates for the configurations: DPT/bounding box (top-left), DPT/segmentation (top-right),
         DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The red dashed line shows
-        the ideal (i.e., model=manual).}
+        the ideal (i.e., model=manual). All distances are in units of meters.}
     \label{fig:spread_comparison}
 \end{figure}
 
 \clearpage
-
-%\subsubsection{Error Analysis}
 
 \begin{figure}[H]
     \vspace{1cm}
@@ -123,22 +143,22 @@ As a result, more pixels corresponding to the transect background which are comm
 the calibration and detection frames are available for depth scale alignment, leading to a
 superior calibration of the detection frame depth scale.
 
-This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_close}, where the bounding box
+This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_close_dpt}, where the bounding box
 method results in an effectively failed calibration while the segmentation method succeeds.
 
 \begin{figure}[htbp]
     \centering
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_bbox}
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_bbox_dpt}
     }\\[1mm]
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_seg}
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/close_seg_dpt}
     }
     \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 0.5 meters (manual estimate).
         In this example, the bounding box method gives a distance estimate of 15.0 meters
         while the segmentation method gives a distance estimate of 1.0 meters}
-    \label{fig:bbox_vs_seg_close}
+    \label{fig:bbox_vs_seg_close_dpt}
 \end{figure}
 
 In contrast, this detection effect does not apply when Depth Anything is used to estimate
@@ -158,7 +178,27 @@ estimate (i.e., bounding box depth from the pixel corresponding to the 20th perc
 and segmentation depth from the depth of the centre-most pixel) rather than differences on depth
 scaling.
 
-Upon inspection of Figure~\ref{fig:distance_comparison}, it can be seen that for both DPT and Depth
+Figure~\ref{fig:bbox_vs_seg_close_da} shows the corresponding Depth Anything depth maps using both
+detection methods for the same example shown in Figure~\ref{fig:bbox_vs_seg_close_dpt}.
+It can be seen that both detection methods lead to identical depth maps, with the final detection
+distance estimates being very close.
+
+\begin{figure}[htbp]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/close_bbox_da}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/close_seg_da}
+    }
+    \caption{Example of Depth Anything depth maps generated using bounding box (top) and segmentation
+        (bottom) detection methods at a detection distance of 0.5 meters (manual estimate).
+        In this example, the bounding box method gives a distance estimate of 4.11 meters
+        while the segmentation method gives a distance estimate of 4.17 meters.}
+    \label{fig:bbox_vs_seg_close_da}
+\end{figure}
+
+Upon inspection of Table~\ref{tab:regression_gradients}, it can be seen that for both DPT and Depth
 Anything models, the gradients of the regression lines (correlating the averages of the binned
 distance estimates with the corresponding manual estimates) of the segmentation detection methods
 are higher relative to their corresponding bounding box regression gradient and also better
@@ -181,7 +221,7 @@ This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_occluded}.
     \makebox[0.8\textwidth][c]{
         \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_seg}
     }
-    \caption{Example of depth maps generated using bounding box (top) and segmentation
+    \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 6.5 meters (manual estimate)
         where the detected individual is partially occluded by foliage. Here, the bounding
         box method gave a distance estimate of 4.40 meters while the segmentation method
@@ -203,7 +243,7 @@ than the individual.
     \makebox[0.8\textwidth][c]{
         \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_haze_seg}
     }
-    \caption{Example of depth maps generated using bounding box (top) and segmentation
+    \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 4.5 meters (manual estimate)
         where the detected individual is partially occluded by foliage. Here, moisture on the
         camera lense has resulted in a slightly hazy image, leading to a failed segmentation
@@ -220,13 +260,82 @@ djou09
 \vspace{5mm}
 \textbf{Depth Model Effects}
 
-If the two distance estimation models (DPT and DA) are compared
+As seen in Table~\ref{tab:regression_gradients}, the gradients of the regression lines
+correlating the averages of the binned DPT distance estimates with respect to their manual
+estimates are greater and also closer the ideal (gradient = 1) than that of Depth Anything.
+This shows that, overall, DPT is better capturing the true scale of depth in the detection
+frames than Depth Anything.
+At short to medium distances (i.e., 2–7 meters), Figure~\ref{fig:distance_comparison} shows
+that distance estimate averages closely follow a linear relationship, indicating that within
+this distance region, both depth models are differentiating relative depth well.
+However, Depth Anything generally over-predicts estimated depth in this region while the DPT
+estimates are much closer to the ideal.
+This trend also holds for the extreme-close distance region for Depth Anything (with both
+detection methods) and also DPT using segmentation (DPT with bounding box over-predicts as
+previously discussed).
+
+While DPT gives a better measure of depth scale at close distances, the depth maps show that
+Depth Anything is superior at differentiating the depth of fine-detail in the detection frames.
+This is shown in Figure~\ref{fig:fine_detail}, where the depth maps generated by all
+configurations with a common detection frame are shown side-by-side.
+
+
+\begin{figure}[H]
+    \centering
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_dpt}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_dpt}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_da}
+    }\\[1mm]
+    \makebox[0.8\textwidth][c]{
+        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_da}
+    }
+    \caption{Example of depth maps generated using DPT/BBOX (row one), DPT/SEG
+        (row two), DA/BBOX (row three) and DA/SEG (row four) detection methods at a detection
+        distance of 13.5 meters (manual estimate). The following distance estimates were given:
+        DPT/BBOX = 10.0, DPT/SEG = 10.4 meters, DA/BBOX = 7.83 meters, DA/SEG = 13.6 meters.}
+    \label{fig:fine_detail}
+\end{figure}
+
+The graphs in Figures~\ref{fig:distance_comparison} and~\ref{fig:spread_comparison} show that
+for both DPT configurations as well as Depth Anything with bounding box, distance estimates
+corresponding to manual estimates of 13.5 meters are significantly under-predicted.
+This is not the case, however, for estimates given by Depth Anything using segmentation detection.
+This is an interesting effect which is perfectly illustrated in Figure~\ref{fig:fine_detail}.
+In this example both of the DPT depth maps fail to capture any significant differentiation in
+depth within the small detection region.
+As a result, the final distance estimates yield roughly equal values of approximately 10 meters.
+In contrast, the Depth Anything depth map (identical for both detection methods) captures
+much more detail in this region, therefore enabling the different pixel sampling techniques used
+in the detection distance calculation to yield different results.
+In the case of the bounding box method, the contribution of close-distance occluding pixels to the
+percentile calculation skew the distance estimate, resulting in a value of 7.83 meters.
+For the segmentation method, however, this is no such influence since detection distance is
+determined by the depth of centre-most point of the segmentation, resulting in a value of 13.6
+meters which is aligned closely to the manual estimate of 13.5 meters.
+Results such as these are achieved in spite of imperfect segmentation since the most important
+factor in these cases, where there is high contrast surrounding the desired pixel sampling region,
+is negating the influence of these surrounding pixels.
+
+\vspace{5mm}
+\textbf{False Positives and Misses}
 
 \vspace{5mm}
 \textbf{Summary}
 
-Explain results in errors table
-Sweet spot
+Errors table
+
+All configurations over-predict
+
+Sweet spot 2–7 meters
+
+Error spike at 7.5 meters
+
+Literature
 
 \clearpage
 
