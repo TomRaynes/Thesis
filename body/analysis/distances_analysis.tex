@@ -297,7 +297,7 @@ configurations with a common detection frame are shown side-by-side.
     \caption{Example of depth maps generated using DPT/BBOX (row one), DPT/SEG
         (row two), DA/BBOX (row three) and DA/SEG (row four) detection methods at a detection
         distance of 13.5 meters (manual estimate). The following distance estimates were given:
-        DPT/BBOX = 10.0, DPT/SEG = 10.4 meters, DA/BBOX = 7.83 meters, DA/SEG = 13.6 meters.}
+        DPT/BBOX = 10.0 meters, DPT/SEG = 10.4 meters, DA/BBOX = 7.83 meters, DA/SEG = 13.6 meters.}
     \label{fig:fine_detail}
 \end{figure}
 
@@ -313,16 +313,13 @@ In contrast, the Depth Anything depth map (identical for both detection methods)
 much more detail in this region, therefore enabling the different pixel sampling techniques used
 in the detection distance calculation to yield different results.
 In the case of the bounding box method, the contribution of close-distance occluding pixels to the
-percentile calculation skew the distance estimate, resulting in a value of 7.83 meters.
+percentile calculation skews the distance estimate, resulting in a value of 7.83 meters.
 For the segmentation method, however, this is no such influence since detection distance is
 determined by the depth of centre-most point of the segmentation, resulting in a value of 13.6
 meters which is aligned closely to the manual estimate of 13.5 meters.
 Results such as these are achieved in spite of imperfect segmentation since the most important
 factor in these cases, where there is high contrast surrounding the desired pixel sampling region,
 is negating the influence of these surrounding pixels.
-
-\vspace{5mm}
-\textbf{False Positives and Misses}
 
 \vspace{5mm}
 \textbf{Summary}
@@ -340,3 +337,148 @@ Literature
 \clearpage
 
 \subsubsection{Effects of Varying Calibration}
+
+\textbf{Exclusive Close/Far Reference Calibration}
+
+Table~\ref{tab:reduced_calibration_errors} shows the overall errors of DPT distance estimates
+(for bounding box and segmentation) calibrated using only the closest and furthest reference
+frames at each transect.
+Figure~\ref{fig:reduced_calibration} shows both the individual modelled distance estimates as
+well as the averages of the modelled distance estimates mapped to their corresponding manual
+estimates.
+
+\vspace{5mm}
+
+\begin{table}[htbp]
+    \centering
+    \caption{Mean average error (MAE), root mean squared error (RMSE) and average difference between
+    model and manual estimate ($\Delta_{average}$) for the bounding box and segmentation detetion methods
+    using only the closest and furthest calibration frames as references.)}
+    \label{tab:reduced_calibration_errors}
+    \begin{tabular}{cccc}
+        \textbf{Method} & \textbf{MAE / m} & \textbf{RMSE / m} & \textbf{$\Delta_{average}$ / m} \\
+        \midrule
+        Bounding Box  & 2.42 & 3.13 & -1.03  \\
+        Segmentation  & 2.16 & 2.83 & -0.755 \\
+    \end{tabular}
+\end{table}
+
+\vspace{5mm}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{body/analysis/assets/distance_graphs/reduced_cal}
+    \caption{Graphs showing mean DPT distance estimates (top) and all modelled distance
+        estimates (bottom) mapped to thier corresponding manual
+        estimates for bounding box (left) and segmentation (right) detection methods using only the
+        closest and furthest calibration frames as references. The blue dotted line
+        shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
+        the error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
+        units of meters.}
+    \label{fig:reduced_calibration}
+\end{figure}
+
+On inspection of Table~\ref{tab:reduced_calibration_errors} and Figure~\ref{fig:reduced_calibration},
+it is evident that this reduced calibration has impacted the results significantly.
+The bounding box results give an overall MAE of 2.42 meters and RMSE of 3.13 meters which correspond
+to increases of 0.61 meters and 0.47 meters respectively when compared to the results obtained using
+all reference frames while the segmentation results give an overall MAE of 2.16 meter and RMSE of
+2.83 meters which correspond to increases of 0.46 meters and 0.38 meters respectively.
+The spread of the distance estimates have also increased for frames corresponding to all manual
+distances.
+Moreover, the negative $\Delta_{average}$ values show that this calibration, on average, leads to
+underestimation of distances in this dataset
+
+The observed shift towards underestimates may be explained by a possible non-linearity in the
+relationship between raw DPT generated depth and ground-truth depth.
+Specifically, DPT outputs a disparity for each pixel in the processed image.
+The calibration frames are used to derive a linear function that maps these raw disparity
+values to a calibrated disparity\cite{HAUCKE2022101536} that is equal to inverse distance
+(i.e., distance = 1/calibrated disparity).
+However, if the true relationship between raw disparity and inverse distance is non-linear,
+(e.g., polynomial), a calibration using only the closest and furthest references would result
+in a biasing of distance estimates in the mid-distance region.
+This effect is visualised in Figure~\ref{fig:disparity_calibration}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{body/analysis/assets/calibration_effects/disparity_calibration}
+    \caption{Simple visualisation showing how the number of reference frames can influence the fitting
+        of a calibration function. The grey solid line represents the true mapping of the uncalibrated DPT
+        outputted disparity to the calibrated disparity (i.e, 1 / distance). The blue dashed line represents
+        a linear disparity mapping fitted using a series of (i.e., fifteen) reference frames while the red
+        dashed line represents one fitted using only two (i.e., closest and furthest) reference frames}
+    \label{fig:disparity_calibration}
+\end{figure}
+
+For example, suppose calibration using all references and calibration using only the closest and furthest
+references give the calibration functions
+\[
+    D_{cal} = 1.5 \cdot D_{raw} - 0.2
+    \qquad \mathrm{and} \qquad
+    D_{cal} = 1.5 \cdot D_{raw} - 0.05
+\]
+respectively, where $D_{raw}$ is the raw uncalibrated disparity and $D_{cal}$ is the calibrated disparity
+equal to inverse distance.
+If a pixel has a raw disparity of $D_{raw}$ = 0.3, applying the 'all references' calibration gives a
+calibrated disparity of $D_{cal}$ = 0.25, resulting in an estimated distance of 4 meters while applying
+the 'two references' calibration gives a calibrated disparity of $D_{cal}$ = 0.4, resulting in an
+estimated distance of 2.5 meters.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/all_frames_1}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/two_frames_1}
+    \end{subfigure}
+    
+    \vspace{5mm}
+
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/all_frames_2}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/two_frames_2}
+    \end{subfigure}
+
+    \caption{Two examples of DPT calibration depth maps calibrated using all reference frames
+        (left) and reference frames at one and fifteen meters (right). The images on the right
+        show a general biasing of depth towards closer distances.}
+    \label{fig:calibrated_maps}
+\end{figure}
+
+
+
+
+
+
+
+%This hypothesis is supported when the average DPT generated distance estimates using all calibration
+%frames are compared to those generated using only the closest and furthest calibration frames.
+%Figure~\ref{fig:calibration_distance_difference} shows the difference in the distance estimates
+%generated by these to calibration methods.
+%
+%\begin{figure}[H]
+%    \centering
+%    \includegraphics[width=0.85\textwidth]{body/analysis/assets/calibration_effects/calibration_distance_difference}
+%    \caption{Graph showing the difference between the average DPT distance estimates calibrated with
+%        all reference frames ($D_{ref=15}$) and those calibrated with only the closest and furthest
+%        reference frames ($D_{ref=2}$) grouped by corresponding manually estimated distance. Both
+%        bounding box and segmentation detection methods are shown.}
+%    \label{fig:calibration_distance_difference}
+%\end{figure}
+%
+%These data imply that the true relationship between
+
+
+\clearpage
+
+\vspace{5mm}
+\textbf{Variable Calibration Effects}
+

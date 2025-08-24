@@ -62,10 +62,16 @@ Calibration frame preparation comprises significant manual annotation resulting 
 therefore it would be a positive outcome if this stage could be streamlined with a reduction in
 calibration requirements.
 
+\vspace{5mm}
+\textbf{Exclusive Close/Far Reference Calibration}
+
 Firstly, a modification was tested over the whole dataset with DPT distance estimation using both
 bounding box and segmentation detection methods.
 Here, the program's run() method was altered to ignore all calibration frames except those corresponding
 to closest and furthest landmarks from the camera.
+
+\vspace{5mm}
+\textbf{Variable Calibration}
 
 Secondly, the effects of varying the number of calibration frames was tested on a single camera
 location.
