@@ -517,7 +517,7 @@ often fails to capture subtle changes in estimated disparity at far distances.
 \textbf{Variable Calibration Effects}
 
 To understand the variable calibration results, the mean average error of the distance estimates
-with respect to their corresponding manual estimates was calculated for each of the calibration
+with respect to their corresponding manual estimates was calculated for each calibration
 of DPT with both bounding box and segmentation detection methods (Figure~\ref{fig:MAE_var_cal}).
 
 \begin{figure}[H]
@@ -529,11 +529,20 @@ of DPT with both bounding box and segmentation detection methods (Figure~\ref{fi
     \label{fig:MAE_var_cal}
 \end{figure}
 
-Figure~\ref{fig:MAE_var_cal} shows a general trend towards lower error as the number of reference
-frames is incremented with minimal difference in error between the corresponding bounding box and
-segmentation runs.
-The error also appears to remain stable onwards from ten references.
-This
+The graph in Figure~\ref{fig:MAE_var_cal} shows minimal difference in error between the corresponding
+bounding box and segmentation runs with a general trend towards lower error as the number of reference
+frames is incremented, owing to the availability of more points of reference by which the calibration
+function is derived.
+The error also appears to stabilise onwards from ten references.
+This reflects the distribution of distances within the dataset, where the majority of
+manual estimates fall into the mid-distance range.
+At this particular camera location, the furthest manually estimated distance of any given
+observation in the associated detection frames was nine meters, aligning with the observed error
+stabilisation from onwards of approximately ten meters, where additional reference frames beyond this
+point correspond to distances greater than the maximum observation distance.
+
+To visualise the effect of varying the number of reference frames on calibration, the calibrated
+camera location depth maps are shown for each of the runs below (Figure~\ref{fig:variable_calibration}).
 
 \begin{figure}[H]
     \centering
@@ -543,3 +552,30 @@ This
         distance of the furthest frame) in the bottom-right corner}
     \label{fig:variable_calibration}
 \end{figure}
+
+On inspection of Figure~\ref{fig:variable_calibration}, calibrations two and four stand out as having
+vastly overestimated background depth.
+This shows that, in these cases, the scale of the calibration function is amplified so much as to scale
+the disparity of these background pixels to below the maximum depth disparity (i.e., lower than 1/15)
+resulting in these pixels being capped at the maximum depth of 15.
+This is reflected in Figure~\ref{fig:variable_calibration}, where large spikes are observed in the errors
+of the associated distance estimates.
+
+It is not immediately clear why this occurs with just these two calibrations.
+Calibration three, despite not capturing the overall depth scale, does not show this effect and
+correlates well with the remaining calibration distance estimate errors and depth maps.
+A reason may be due to instability of the calibration function when few references are used
+resulting from a greater influence from errors in DPT output and calibration frame mask quality;
+however, this remains unclear.
+
+It is also worth noting that, in the close distance calibrations (roughly corresponding to the top
+rows in Figure~\ref{fig:variable_calibration}), a reference landmark is depicted as a segmented depth
+in the depth maps.
+This is explained by understanding that the calibrated depth map of a given camera location is
+derived from the calibrated reference frame in which that landmark is at the furthest distance form
+the camera\cite{HAUCKE2022101536}.
+This gives a calibration map where the landmark occupies the smallest number of pixels so to maximise
+the background context.
+When few references are used, however, the furthest landmark is close and occupies a prominent number
+of pixels.
+
