@@ -75,12 +75,7 @@ to closest and furthest landmarks from the camera.
 
 Secondly, the effects of varying the number of calibration frames was tested on a single camera
 location.
-A total of fifteen runs were carried out also using DPT distance estimation with both bounding box
+A total of fourteen runs were carried out using DPT distance estimation with both bounding box
 and segmentation detection methods.
-The first of these used a single (closest) calibration frame with each subsequent run then including
-the next calibration frame in the sequence (i.e., 1, 1–2, 1–3, \ldots 1–15).
-For the runs using at least two calibration frames (i.e., runs two through fifteen) a regression
-function could be fitted as normal; however, this was not possible for the first run where a single
-calibration frame was used.
-Here, the calibrate() method was modified to return a simple scale factor transforming the single
-modelled distance to its ground truth.
+The first of these used only the 1 and 2 meter calibration frames with each subsequent run then including
+the next calibration frame in the sequence (i.e., 1–2, 1–3, 1–4 \ldots 1–15).
