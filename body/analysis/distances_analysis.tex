@@ -389,8 +389,14 @@ distances.
 Moreover, the negative $\Delta_{average}$ values show that this calibration, on average, leads to
 underestimation of distances in this dataset
 
-The observed shift towards underestimates may be explained by a possible non-linearity in the
-relationship between raw DPT generated depth and ground-truth depth.
+The increase in error of this calibration method is most likely a result of the calibration function
+being much more susceptible to any outliers in the DPT estimated depth of the reference frames in
+conjunction with any noise/imperfections in the corresponding calibration frame masks.
+When many references are used, the impact of sparse outliers are minimised due to calibration
+function derivation from predominantly representative data.
+
+More interestingly, the observed shift towards underestimates may be explained by a possible
+non-linearity in the relationship between raw DPT generated depth and ground-truth depth.
 Specifically, DPT outputs a disparity for each pixel in the processed image.
 The calibration frames are used to derive a linear function that maps these raw disparity
 values to a calibrated disparity\cite{HAUCKE2022101536} that is equal to inverse distance
@@ -425,7 +431,12 @@ calibrated disparity of $D_{cal}$ = 0.25, resulting in an estimated distance of 
 the 'two references' calibration gives a calibrated disparity of $D_{cal}$ = 0.4, resulting in an
 estimated distance of 2.5 meters.
 
-\begin{figure}[htbp]
+This hypothesis is supported when the DPT reference depth maps calibrated using both reference frame
+samples are compared.
+Figure~\ref{fig:calibrated_maps} shows examples of how the close/far frame calibration results in
+a shift in depth towards closer distances.
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.48\textwidth}
         \centering
@@ -447,15 +458,38 @@ estimated distance of 2.5 meters.
         \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/two_frames_2}
     \end{subfigure}
 
-    \caption{Two examples of DPT calibration depth maps calibrated using all reference frames
+    \caption{Two examples of DPT reference depth maps calibrated using all reference frames
         (left) and reference frames at one and fifteen meters (right). The images on the right
-        show a general biasing of depth towards closer distances.}
+        show a general biasing of depth towards closer distances for pixels in the close to medium
+        depth regions.}
     \label{fig:calibrated_maps}
 \end{figure}
 
+It is also seen that depth contrast of the far-region pixels is lost is many cases when the
+close/far calibration is used (Figure~\ref{fig:far_scale}).
+This highlights the importance of using a range of references that correspond to a range of
+distances in the far region.
+When these are not used in the calibration (in this case), the scale of the calibration function
+often fails to capture subtle changes in estimated disparity at far distances.
 
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/all_far}
+    \end{subfigure}
+    \begin{subfigure}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[height=0.15\textheight]{body/analysis/assets/calibration_effects/calibrated_maps/two_far}
+    \end{subfigure}
 
-
+    \caption{Example of DPT reference depth maps calibrated using all reference frames (left) and reference
+        frames at one and fifteen meters (right). The calibration seen on the rights shows a loss of depth
+        contrast in the far-distance region. Here, all pixels corresponding to distances of approximately ten
+        meters and over are overestimated to the maximum depth of fifteen meters. The calibration seen on the
+        left better captures the depth contrast of the far-region.}
+    \label{fig:far_scale}
+\end{figure}
 
 
 
@@ -482,3 +516,30 @@ estimated distance of 2.5 meters.
 \vspace{5mm}
 \textbf{Variable Calibration Effects}
 
+To understand the variable calibration results, the mean average error of the distance estimates
+with respect to their corresponding manual estimates was calculated for each of the calibration
+of DPT with both bounding box and segmentation detection methods (Figure~\ref{fig:MAE_var_cal}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{body/analysis/assets/calibration_effects/MAE_var_cal}
+    \caption{Graph showing the mean average error (MAE) of all distance estimates using DPT calibrated
+        with a varying number of refrence frames with respect to their corresponding manual distance
+        estimate.}
+    \label{fig:MAE_var_cal}
+\end{figure}
+
+Figure~\ref{fig:MAE_var_cal} shows a general trend towards lower error as the number of reference
+frames is incremented with minimal difference in error between the corresponding bounding box and
+segmentation runs.
+The error also appears to remain stable onwards from ten references.
+This
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{body/analysis/assets/calibration_effects/variable_calibation}
+    \caption{DPT depth maps of a single camera location generatated using a variable number of
+        calibration frames, each labelled with the corresponding number of frames (also the landmark
+        distance of the furthest frame) in the bottom-right corner}
+    \label{fig:variable_calibration}
+\end{figure}
