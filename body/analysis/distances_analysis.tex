@@ -460,8 +460,8 @@ a shift in depth towards closer distances.
 
     \caption{Two examples of DPT reference depth maps calibrated using all reference frames
         (left) and reference frames at one and fifteen meters (right). The images on the right
-        show a general biasing of depth towards closer distances for pixels in the close to medium
-        depth regions.}
+        show a general biasing of depth towards closer distances, especially for pixels in the
+        close to medium depth regions.}
     \label{fig:calibrated_maps}
 \end{figure}
 
@@ -483,10 +483,10 @@ to this maximum value.
     \end{subfigure}
 
     \caption{Example of DPT reference depth maps calibrated using all reference frames (left) and reference
-        frames at one and fifteen meters (right). The calibration seen on the rights shows a loss of depth
+        frames at one and fifteen meters (right). The calibration seen on the right shows a loss of depth
         contrast in the far-distance region. Here, all pixels corresponding to distances of approximately ten
-        meters and over are overestimated to the maximum depth of fifteen meters. The calibration seen on the
-        left better captures the depth contrast of the far-region.}
+        meters and over are overestimated to distances greater than fifteen meters resulting in these estimates
+        being clipped at this value.}
     \label{fig:far_scale}
 \end{figure}
 
@@ -500,11 +500,10 @@ This is visualised in Figure~\ref{fig:disparity_scale}.
     \includegraphics[width=0.65\textwidth]{body/analysis/assets/calibration_effects/disparity_scale}
     \caption{Simple visualisation showing how sufficient non-linearity in the raw disparity to calibrated
     disparity mapping can result in different scales of fitted calibration function approximations when
-    different numbers of reference frames are used. The grey solid line represents the true mapping of the
-    uncalibrated DPT outputted disparity to the calibrated disparity (i.e, 1 / distance). The blue dashed
-    line represents a linear disparity mapping fitted using a series of (i.e., fifteen) reference frames
-    while the red dashed line represents one fitted using only two (i.e., closest and furthest) reference
-    frames}
+    different numbers of reference frames are used. The grey solid line represents the true mapping of raw
+    to calibrated disparity (i.e, 1 / distance). The blue dashed
+    line represents a linear disparity mapping fitted using many reference frames
+    while the red dashed line represents one fitted using only frames at one and fifteen meters.}
     \label{fig:disparity_scale}
 \end{figure}
 
@@ -524,9 +523,9 @@ of DPT with both bounding box and segmentation detection methods (Figure~\ref{fi
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.7\textwidth]{body/analysis/assets/calibration_effects/MAE_var_cal}
-    \caption{Graph showing the mean average error (MAE) of all distance estimates using DPT calibrated
-        with a varying number of refrence frames with respect to their corresponding manual distance
-        estimate.}
+    \caption{Graph showing the mean average error (MAE) of all distance estimates associated with
+        a single camera location with respect to their corresponding manual distance estimates
+        using DPT calibrated with a varying number of refrence frames.}
     \label{fig:MAE_var_cal}
 \end{figure}
 
@@ -570,7 +569,7 @@ resulting from a greater influence from errors in DPT output and calibration fra
 however, this remains unclear.
 
 It is also worth noting that, in the close distance calibrations (roughly corresponding to the top
-rows in Figure~\ref{fig:variable_calibration}), a reference landmark is depicted as a segmented depth
+row in Figure~\ref{fig:variable_calibration}), a reference landmark is depicted as a segmented depth
 in the depth maps.
 This is explained by understanding that the calibrated depth map of a given camera location is
 derived from the calibrated reference frame in which that landmark is at the furthest distance form
