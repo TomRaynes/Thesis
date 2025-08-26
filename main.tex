@@ -22,8 +22,17 @@
 \usepackage{chemformula}
 \usepackage{booktabs}
 \usepackage{float}
+\usepackage{multirow}
+\usepackage{siunitx}
 %\usepackage[superscript]{cite}
 %\usepackage{natbib}  % or any other citation package you use
+
+\sisetup{
+    table-number-alignment = center,
+    table-format = 1.4, % 1 digit before decimal, up to 4 after
+    detect-weight = true,
+    detect-inline-weight = math
+}
 
 \makeatletter
 \renewcommand\@cite[2]{\textsuperscript{[#1\if@tempswa , #2\fi]}}
