@@ -4,9 +4,13 @@ Density and abundance estimates obtained using distance estimates generated with
 configuration of the distance estimation pipeline for both the supplemented data (manual
 frame sample) and model only data (automated frame sample) are shown in
 Figure~\ref{fig:activity_chart}.
+Here, it can be seen that a range of abundance and density estimates are given; however,
+all estimates using modelled distances are underestimated relative the estimates using
+manually estimated distances.
+
+\vspace{5mm}
 
 \begin{figure}[H]
-    \vspace{1cm}
     \centering
     \includegraphics[width=0.8\textwidth]{body/analysis/assets/activity/density_chart}
     \includegraphics[width=0.81\textwidth]{body/analysis/assets/activity/abundance_chart}
@@ -20,14 +24,65 @@ Figure~\ref{fig:activity_chart}.
     \label{fig:activity_chart}
 \end{figure}
 
+\clearpage
+
 \subsubsection{Configuration Effects}
 
+The data show that the density and abundance estimates obtained using DPT are greater than those
+using Depth Anything.
+Additionally, for each of these distance estimation models, the activity estimates obtained using the
+bounding box detection method are also generally greater than those using segmentation detection.
+This gives the overall trend of a decrease in activity from MANUAL $\rightarrow$ DPT/BBOX $\rightarrow$
+DPT/SEG $\rightarrow$ DA/BBOX $\rightarrow$ DA/SEG\@.
+This trend can be rationalised by considering how distance influences estimated density.
 
+In essence, density estimation hinges on fitting a detection function, $g(x)$, to the distribution
+of observed distances.
+The gives the probability that a particular individual will be detected at a given distance, giving
+a measure of how detection probability decays with distance.
+This relies on the assumption that there is a  100\% probability of individuals being detected at a
+distance of zero meters.
+When distances are overestimated, the detection function becomes elongated such that detection
+probability decays at a slower rate with respect to distance owing to the elongated function accounting
+for an increased probability of detection at far distances (Figure~\ref{fig:detection_function}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{body/analysis/assets/activity/detection_function}
+    \caption{Graph showing how the distribution of distance estimates affects the fitting of a
+    detection function. The blue line represents a detection function fitted with distances
+    of lower values while the red line represents one fitted with larger values, resulting in
+    the area under these curves being different in size.}
+    \label{fig:detection_function}
+\end{figure}
+
+Density, $D$, is given by the equation
+\[
+    D = \dfrac{n}{2L \cdot \displaystyle \int_{0}^{w} g(y) \, dy}
+\]
+where $n$ is the number of detected individuals, $L$ is the transect length and $w$ is the far
+truncation distance corresponding to the furthest considered distance\cite{distance_samping}.
+This shows that density is inversely proportional to the area under the detection function given
+by $\int_{0}^{w} g(y) \, dy$, demonstrating that systematic overestimation of distance will lead
+to lower density estimates.
+
+As seen previously in Figure~\ref{tab:overall_errors} (Section~\ref{subsubsec:distance_comparison}),
+the $\Delta_{average}$ values (measure of over/under-prediction relative to manual) of these
+configurations tend towards overestimation in order of DPT/BBOX $\rightarrow$ DPT/SEG $\rightarrow$
+DA/BBOX $\rightarrow$ DA/SEG, where DPT/BBOX gives the lowest overestimate of $\Delta_{average}$ = 0.586
+meters and DA/SEG gives the largest overestimate of $\Delta_{average}$ = 2.80 meters.
+This observed correlation with the activity estimates seen in Figure~\ref{fig:activity_chart}, in
+conjunction with the understanding that distance overestimates result in density underestimates, explains
+this trend.
 
 \subsubsection{Sample Effects}
 
-Single chimp frame distances supplemented with manual distances
+In Figure~\ref{fig:activity_chart}, the 'supplemented' and 'model only' data refer to activity
+estimates obtained using the manual and automated detection frame samples respectively (See
+Section~\ref{subsubsec:formatting}).
 
 \subsubsection{Additional Considerations}
 
 False Positives and Misses
+
+Bootstraps
