@@ -62,9 +62,9 @@ Density, $D$, is given by the equation
 \]
 where $n$ is the number of detected individuals, $L$ is the transect length and $w$ is the far
 truncation distance corresponding to the furthest considered distance\cite{distance_samping}.
-This shows that density is inversely proportional to the area under the detection function given
-by $\int_{0}^{w} g(y) \, dy$, demonstrating that systematic overestimation of distance will lead
-to lower density estimates.
+This shows that density is inversely proportional to the area under the detection function curve
+given by $\int_{0}^{w} g(y) \, dy$, demonstrating that systematic overestimation of distance will
+lead to lower density estimates.
 
 As seen previously in Figure~\ref{tab:overall_errors} (Section~\ref{subsubsec:distance_comparison}),
 the $\Delta_{average}$ values (measure of over/under-prediction relative to manual) of these
@@ -80,9 +80,52 @@ this trend.
 In Figure~\ref{fig:activity_chart}, the 'supplemented' and 'model only' data refer to activity
 estimates obtained using the manual and automated detection frame samples respectively (See
 Section~\ref{subsubsec:formatting}).
+It is seen that for all distance estimation pipeline configurations, the model only distances
+consistently underestimate density and abundance relative to the corresponding supplemented
+data.
+This result is unsurprising given the nature of the frame sampling and formatting methods used
+to obtain these distance data.
 
-\subsubsection{Additional Considerations}
+In the case of the supplemented data obtained from the manual sample, the total number of individual
+distance estimates (observations) used to estimate population activity is exactly equal to the
+number of entirely manual distance estimates used to derive a manual estimate (i.e., the conventional
+method that is used as a benchmark).
+Here, each sampled frame corresponds to exactly one manual annotation supplied in the dataset.
+As only the distances associated with detection frames capturing a single individual are model estimated
+(Section~\ref{subsubsec:distance_comparison}), all remaining annotations that are not covered are
+supplemented with the associated manual estimates.
+This includes those corresponding to single-chimp frames where detections where missed by Mega Detector.
 
-False Positives and Misses
+In contrast, as the model only data obtained from the automated sample are not associated with any
+specific annotations in the dataset, the number of individual distance estimates used to estimate
+activity is entirely dependent on the ability of Mega Detector to identify individuals.
+The dense forested environment at Taï national park inevitably results in many individuals undetected
+in circumstances where the human annotator was indeed able to do so.
+When significant occlusion is a factor, the detector is handicapped by the lack of context from
+previous and subsequent frames that are available to the human annotator.
+Another contributor to this are the instances where two individuals are detected as a single individual.
+Cases such as these are most commonly observed where an individual is holding an infant.
+Ultimately, these factors result in many observations being unaccounted for with this model only data
+(almost a thousand misses in this case) and leads to underestimated density and abundance, given that these
+are directly related to the number of detections.
 
-Bootstraps
+\subsubsection{Additional Comments}
+
+\textbf{False Positives}
+
+One might assume that the opposite effect may hold influence over the activity estimates to
+some degree.
+While false positives do occur, they can be considered mostly insignificant since the number
+of these cases is dwarfed by many more missed detections, thus constituting minimal influence
+on density and abundance estimates.
+
+\vspace{5mm}
+\textbf{Bootstraps}
+
+The results of the bootstrapping (Tables~\ref{tab:suplemented_activity} and~\ref{tab:model_only_activity},
+Appendix) for the different configurations generally show good stability
+with minimal effect on the variance, error and confidence intervals, indicating that the functions
+fitted to the distance distributions are suitable and insensitive to random fluctuations in
+the data from resampling.
+This gives a positive insight into the density and abundance estimates and indicates that the errors
+are representative with respect to the distance distribution.
