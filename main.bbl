@@ -92,6 +92,37 @@ R.~Ranftl, K.~Lasinger, D.~Hafner, K.~Schindler, and V.~Koltun, ``Towards
   cross-dataset transfer,'' \emph{IEEE Transactions on Pattern Analysis and
   Machine Intelligence}, vol.~44, no.~3, pp. 1623--1637, 2022.
 
+\bibitem{ransac}
+\BIBentryALTinterwordspacing
+M.~A. Fischler and R.~C. Bolles, ``Random sample consensus: A paradigm for
+  model fitting with applications to image analysis and automated
+  cartography,'' in \emph{Readings in Computer Vision}, M.~A. Fischler and
+  O.~Firschein, Eds.\hskip 1em plus 0.5em minus 0.4em\relax San Francisco (CA):
+  Morgan Kaufmann, 1987, pp. 726--740. [Online]. Available:
+  \url{https://www.sciencedirect.com/science/article/pii/B9780080515816500702}
+\BIBentrySTDinterwordspacing
+
+\bibitem{zero_shot}
+\BIBentryALTinterwordspacing
+M.~Palatucci, D.~Pomerleau, G.~E. Hinton, and T.~M. Mitchell, ``Zero-shot
+  learning with semantic output codes,'' in \emph{Advances in Neural
+  Information Processing Systems}, Y.~Bengio, D.~Schuurmans, J.~Lafferty,
+  C.~Williams, and A.~Culotta, Eds., vol.~22.\hskip 1em plus 0.5em minus
+  0.4em\relax Curran Associates, Inc., 2009. [Online]. Available:
+  \url{https://proceedings.neurips.cc/paper_files/paper/2009/file/1543843a4723ed2ab08e18053ae6dc5b-Paper.pdf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{dino_v2}
+\BIBentryALTinterwordspacing
+M.~Oquab, T.~Darcet, T.~Moutakanni, H.~Vo, M.~Szafraniec, V.~Khalidov,
+  P.~Fernandez, D.~Haziza, F.~Massa, A.~El-Nouby, M.~Assran, N.~Ballas,
+  W.~Galuba, R.~Howes, P.-Y. Huang, S.-W. Li, I.~Misra, M.~Rabbat, V.~Sharma,
+  G.~Synnaeve, H.~Xu, H.~Jegou, J.~Mairal, P.~Labatut, A.~Joulin, and
+  P.~Bojanowski, ``Dinov2: Learning robust visual features without
+  supervision,'' 2024. [Online]. Available:
+  \url{https://arxiv.org/abs/2304.07193}
+\BIBentrySTDinterwordspacing
+
 \bibitem{YOLO}
 R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
   features of the popular object detector,'' 07 2024.

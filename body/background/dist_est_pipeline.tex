@@ -30,8 +30,9 @@ pixel sampling.
 
 \textbf{DPT vs Conventional Architecture}
 
-The DPT framework, introduced by Ranftl et al.\cite{dpt}, adapts the conventional convolutional
-encoder/decoder architecture typically used for dense prediction tasks\cite{segmentation_CNN,invariant_CNNs}
+DPT, introduced by Ranftl et al.\cite{dpt}, is a, novel-conceived, architecture for dense prediction tasks,
+adapting the conventional convolutional encoder/decoder architecture typically used for dense
+prediction\cite{segmentation_CNN,invariant_CNNs}
 (i.e., the labelling of all pixels in an image), by substituting the encoder with a series of staged
 vision transformers\cite{vision_transformer,transformer}.
 This proves to be beneficial for tasks involving dense prediction (i.e., MDE) as the network retains
@@ -145,9 +146,25 @@ For each of the three previously stated minimisation formulae, used to derive th
 fitting values for scale and shift as to minimal overall disparity error, the RANSAC fitting method
 is used\cite{HAUCKE2022101536,ransac}.
 
-
-
 \subsubsection{Depth Anything}
+
+Depth Anything is a deep learning model for monocular depth estimation that gives pixel-wise
+metric distance estimates.
+Conceptually, it builds on the DPT framework where a convolutional encoder is substituted for a
+backbone of pre-trained staged vision transformers\cite{dpt,depth_anything}.
+In development, the objective of the researchers was to "build a foundation model for
+MDE"\cite{depth_anything}, whereby accurate depth estimates are given even in circumstances
+where the model is applied to unseen datasets, i.e., achieving zero-shot performance\cite{zero_shot}.
+
+The model uses a DINOv2 encoder initialised with pre-trained weights\cite{dino_v2}; however,
+the novelty of Depth Anything, however, lies in how it is trained.
+The training methodology leverages an enormous quantity of unlabelled monocular images that are
+automatically labelled with corresponding pixel-wise pseudo-distance estimates.
+To achieve this, the researchers first train a 'teacher' MDE model on approximately 1.5 million
+pre-labelled monocular images and corresponding ground-truth targets collected from a variety of
+datasets.
+A "data-engine" is created to collect approximately 62 million unlabelled images from many datasets,
+which are then automatically assign target depth labels by the teacher model.
 
 \subsubsection{Mega Detector}
 
