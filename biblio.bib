@@ -20,7 +20,7 @@
     doi = {10.48550/arXiv.2407.20892}
 }
 
-@Article{rs17040717,
+@Article{mde_models_comparison,
     AUTHOR = {Jia, Jiwen and Kang, Junhua and Chen, Lin and Gao, Xiang and Zhang, Borui and Yang, Guijun},
     TITLE = {A Comprehensive Evaluation of Monocular Depth Estimation Methods in Low-Altitude Forest Environment},
     JOURNAL = {Remote Sensing},
@@ -192,3 +192,55 @@
     url={https://arxiv.org/abs/2304.07193},
 }
 
+@misc{cutmix,
+    title={CutMix: Regularization Strategy to Train Strong Classifiers with Localizable Features},
+    author={Sangdoo Yun and Dongyoon Han and Seong Joon Oh and Sanghyuk Chun and Junsuk Choe and Youngjoon Yoo},
+    year={2019},
+    eprint={1905.04899},
+    archivePrefix={arXiv},
+    primaryClass={cs.CV},
+    url={https://arxiv.org/abs/1905.04899},
+}
+
+
+@Article{perturbation,
+    AUTHOR = {Wang, Jie and Wu, Zili and Lu, Minyan and Ai, Jun},
+    TITLE = {An Empirical Study on the Effect of Training Data Perturbations on Neural Network Robustness},
+    JOURNAL = {Sensors},
+    VOLUME = {24},
+    YEAR = {2024},
+    NUMBER = {15},
+    ARTICLE-NUMBER = {4874},
+    URL = {https://www.mdpi.com/1424-8220/24/15/4874},
+    PubMedID = {39123921},
+    ISSN = {1424-8220},
+    ABSTRACT = {The vulnerability of modern neural networks to random noise and deliberate attacks has raised concerns about their robustness, particularly as they are increasingly utilized in safety- and security-critical applications. Although recent research efforts were made to enhance robustness through retraining with adversarial examples or employing data augmentation techniques, a comprehensive investigation into the effects of training data perturbations on model robustness remains lacking. This paper presents the first extensive empirical study investigating the influence of data perturbations during model retraining. The experimental analysis focuses on both random and adversarial robustness, following established practices in the field of robustness analysis. Various types of perturbations in different aspects of the dataset are explored, including input, label, and sampling distribution. Single-factor and multi-factor experiments are conducted to assess individual perturbations and their combinations. The findings provide insights into constructing high-quality training datasets for optimizing robustness and recommend the appropriate degree of training set perturbations that balance robustness and correctness, and contribute to understanding model robustness in deep learning and offer practical guidance for enhancing model performance through perturbed retraining, promoting the development of more reliable and trustworthy deep learning systems for safety-critical applications.},
+    DOI = {10.3390/s24154874}
+}
+
+@inproceedings{nyu_v2,
+    author = {Silberman, Nathan and Hoiem, Derek and Kohli, Pushmeet and Fergus, Rob},
+    title = {Indoor segmentation and support inference from RGBD images},
+    year = {2012},
+    isbn = {9783642337147},
+    publisher = {Springer-Verlag},
+    address = {Berlin, Heidelberg},
+    url = {https://doi.org/10.1007/978-3-642-33715-4_54},
+    doi = {10.1007/978-3-642-33715-4_54},
+    abstract = {We present an approach to interpret the major surfaces, objects, and support relations of an indoor scene from an RGBD image. Most existing work ignores physical interactions or is applied only to tidy rooms and hallways. Our goal is to parse typical, often messy, indoor scenes into floor, walls, supporting surfaces, and object regions, and to recover support relationships. One of our main interests is to better understand how 3D cues can best inform a structured 3D interpretation. We also contribute a novel integer programming formulation to infer physical support relations. We offer a new dataset of 1449 RGBD images, capturing 464 diverse indoor scenes, with detailed annotations. Our experiments demonstrate our ability to infer support relations in complex scenes and verify that our 3D scene cues and inferred support lead to better object segmentation.},
+    booktitle = {Proceedings of the 12th European Conference on Computer Vision - Volume Part V},
+    pages = {746–760},
+    numpages = {15},
+    location = {Florence, Italy},
+    series = {ECCV'12}
+}
+
+@article{kitti,
+    title={Vision meets robotics: The KITTI dataset},
+    author={Andreas Geiger and Philip Lenz and Christoph Stiller and Raquel Urtasun},
+    journal={The International Journal of Robotics Research},
+    year={2013},
+    volume={32},
+    pages={1231 - 1237},
+    url={https://api.semanticscholar.org/CorpusID:9455111}
+}

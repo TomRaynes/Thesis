@@ -105,7 +105,7 @@ With these computed scales and shifts for each calibration frame, the overall sc
 for the calibration function mapping the raw disparity output to calibrated disparity for the whole camera
 location are calculated such that
 \[
-    (m,c) \approx \argmin_{m,c} \sum_{i=1}^{N} |m \cdot \textbf{median}(m_i \cdot \textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1) + c_i ) + c - \dfrac{1}{z_i}|
+    (m,c) \approx \argmin_{m,c} \sum_{i=1}^{N} |m \cdot \mathrm{median}(m_i \cdot \textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1) + c_i ) + c - \dfrac{1}{z_i}|
 \]
 where $\textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1)$ is all pixels in the disparity map $\textbf{D}_i^{ref}$
 enclosed within the binary mask $\textbf{M}_i^{ref}$ and $z_i$ is the ground-truth distance.
@@ -157,14 +157,28 @@ MDE"\cite{depth_anything}, whereby accurate depth estimates are given even in ci
 where the model is applied to unseen datasets, i.e., achieving zero-shot performance\cite{zero_shot}.
 
 The model uses a DINOv2 encoder initialised with pre-trained weights\cite{dino_v2}; however,
-the novelty of Depth Anything, however, lies in how it is trained.
+the novelty of Depth Anything lies in how it is trained.
 The training methodology leverages an enormous quantity of unlabelled monocular images that are
 automatically labelled with corresponding pixel-wise pseudo-distance estimates.
-To achieve this, the researchers first train a 'teacher' MDE model on approximately 1.5 million
-pre-labelled monocular images and corresponding ground-truth targets collected from a variety of
-datasets.
+To achieve this, the researchers conceive two MDE models, both of identical pre-trained architecture
+(described above), referred to as 'teacher' and 'student' models.
+Firstly, the teacher model is trained on approximately 1.5 million pre-labelled monocular images
+and corresponding ground-truth targets collected from a variety of datasets.
 A "data-engine" is created to collect approximately 62 million unlabelled images from many datasets,
-which are then automatically assign target depth labels by the teacher model.
+which are then processed by the teacher model to automatically assign corresponding target depth labels,
+giving an extremely large dataset of pseudo-labelled images.
+This is then used as training data for the student model.
+Finally, The model is fine-tuned with metric datasets\cite{nyu_v2,kitti}, giving the final model that
+is used in this distance sampling study\cite{depth_anything}.
+
+Of important note, for training of the student model, the training data images were artificially
+deformed as to introduce perturbations\cite{depth_anything} such as colour distortion and spacial
+distortion using CutMix\cite{cutmix}.
+This necessitates the model to be responsive to more complex cues (e.g., geometry, high-level semantics)
+in order to predict distances aligned with the predictions of the unperturbed teacher model.\cite{depth_anything}
+The overall effect of this is that model is more robust and generalised, showing strong performance in
+zero-shot distance estimation\cite{depth_anything,mde_models_comparison}
+
 
 \subsubsection{Mega Detector}
 

@@ -123,6 +123,39 @@ M.~Oquab, T.~Darcet, T.~Moutakanni, H.~Vo, M.~Szafraniec, V.~Khalidov,
   \url{https://arxiv.org/abs/2304.07193}
 \BIBentrySTDinterwordspacing
 
+\bibitem{nyu_v2}
+\BIBentryALTinterwordspacing
+N.~Silberman, D.~Hoiem, P.~Kohli, and R.~Fergus, ``Indoor segmentation and
+  support inference from rgbd images,'' in \emph{Proceedings of the 12th
+  European Conference on Computer Vision - Volume Part V}, ser. ECCV'12.\hskip
+  1em plus 0.5em minus 0.4em\relax Berlin, Heidelberg: Springer-Verlag, 2012,
+  p. 746–760. [Online]. Available:
+  \url{https://doi.org/10.1007/978-3-642-33715-4_54}
+\BIBentrySTDinterwordspacing
+
+\bibitem{kitti}
+\BIBentryALTinterwordspacing
+A.~Geiger, P.~Lenz, C.~Stiller, and R.~Urtasun, ``Vision meets robotics: The
+  kitti dataset,'' \emph{The International Journal of Robotics Research},
+  vol.~32, pp. 1231 -- 1237, 2013. [Online]. Available:
+  \url{https://api.semanticscholar.org/CorpusID:9455111}
+\BIBentrySTDinterwordspacing
+
+\bibitem{cutmix}
+\BIBentryALTinterwordspacing
+S.~Yun, D.~Han, S.~J. Oh, S.~Chun, J.~Choe, and Y.~Yoo, ``Cutmix:
+  Regularization strategy to train strong classifiers with localizable
+  features,'' 2019. [Online]. Available: \url{https://arxiv.org/abs/1905.04899}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mde_models_comparison}
+\BIBentryALTinterwordspacing
+J.~Jia, J.~Kang, L.~Chen, X.~Gao, B.~Zhang, and G.~Yang, ``A comprehensive
+  evaluation of monocular depth estimation methods in low-altitude forest
+  environment,'' \emph{Remote Sensing}, vol.~17, no.~4, 2025. [Online].
+  Available: \url{https://www.mdpi.com/2072-4292/17/4/717}
+\BIBentrySTDinterwordspacing
+
 \bibitem{YOLO}
 R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
   features of the popular object detector,'' 07 2024.
