@@ -22,8 +22,11 @@ a filename in an input bar.
     \centering
     \includegraphics[scale=0.5]{body/experimental/assets/frame_extractor/drag_drop}
     \vspace{-3mm}
-    \includegraphics[scale=0.5]{body/experimental/assets/frame_extractor/save_frame}
-    \caption{Frame extractor program showing the drag/drop (top) and save frame (bottom) features}
+    \includegraphics[scale=0.4]{body/experimental/assets/frame_extractor/save_frame}
+    \caption{Frame extractor program showing the drag/drop (top) and save frame (bottom) features.
+    This custom-built software enables frames to be quickly identified and extracted from the
+    reference videos, significantly decreasing the time requirement of obtaining a high volume
+    of calibration frames over a large dataset.}
     \label{fig:frame_extractor}
 \end{figure}
 
@@ -46,45 +49,91 @@ masks for the landmarks.
 
 The efficacy of this automated method of calibration frame mask generation was tested on
 several raw calibration frames.
-Two examples of the raw calibration frames (Figure~\ref{fig:raw_frames}) along with their
-corresponding manual (Figure~\ref{fig:manual_masks}) and automated (Figure~\ref{fig:sam_masks})
-masks are shown below.
+Examples of raw calibration frames and their corresponding manual and automated binary masks
+are shown in Figure~\ref{fig:calibration_frames}.
+
+\vspace{5mm}
 
 \begin{figure}[htbp]
     \centering
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_blurred}
-    }\\[1mm]
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far}
-    }
-    \caption{Raw calibration frames}
-    \label{fig:raw_frames}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/close_blurred}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/far}
+    \end{minipage}
+
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/close_manual_mask}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/far_manual_mask}
+    \end{minipage}
+
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/close_sam_mask}
+    \end{minipage}
+    \begin{minipage}[t]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{body/experimental/assets/frame_masks/far_sam_mask}
+    \end{minipage}
+
+    \caption{Examples of raw calibration frames (top) along with their corresponding manual (middle)
+    and automated (bottom) binary segmentation masks for close (left) and far (right) distances.
+    At close distance the manual masks are both of a good quality; however, edge-leakage and
+    imperfect segmentation can be seen in the case of the automated mask at far distance.
+    Additionally, the automated pipeline fails to incorporate the paper sheet into the segmentation
+    for both distances.}
+    \label{fig:calibration_frames}
 \end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_manual_mask}
-    }\\[1mm]
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_manual_mask}
-    }
-    \caption{Manual calibration frame masks}
-    \label{fig:manual_masks}
-\end{figure}
 
-\begin{figure}[htbp]
-    \centering
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_sam_mask}
-    }\\[1mm]
-    \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_sam_mask}
-    }
-    \caption{Automated calibration frame masks}
-    \label{fig:sam_masks}
-\end{figure}
+
+
+
+
+
+
+%\begin{figure}[htbp]
+%    \centering
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_blurred}
+%    }\\[1mm]
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far}
+%    }
+%    \caption{Raw calibration frames}
+%    \label{fig:raw_frames}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%    \centering
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_manual_mask}
+%    }\\[1mm]
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_manual_mask}
+%    }
+%    \caption{Manual calibration frame masks}
+%    \label{fig:manual_masks}
+%\end{figure}
+%
+%\begin{figure}[htbp]
+%    \centering
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/close_sam_mask}
+%    }\\[1mm]
+%    \makebox[0.8\textwidth][c]{
+%        \includegraphics[width=0.9\textwidth]{body/experimental/assets/frame_masks/far_sam_mask}
+%    }
+%    \caption{Automated calibration frame masks}
+%    \label{fig:sam_masks}
+%\end{figure}
 
 
 

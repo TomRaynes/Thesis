@@ -3,7 +3,7 @@
 \subsubsection{Setup}
 
 BlueCrystal4 was used to run the distance estimation pipeline across the dataset.
-Minor adjustments to the load\_model() methods of the DPT and DepthAnything classes
+Minor adjustments to the model loading of the DPT and DepthAnything
 were made in order to configure ONNX Runtime to utilise all CPU cores allocated by
 SLURM (28 in this case).
 
@@ -47,9 +47,9 @@ that is furthest from the segmentation boundary).
 Additionally, all runs using the segmentation detection method were parameterised with the
 'calibration mask animals' flag.
 This has the following effect:
-During the detection calibration alignment where the scale of the furthest calibration frame reference
-target is transferred to the detection frame, only the pixels inside the animal segmentation boundary
-(rather than the entire bounding box) are excluded.
+During the detection calibration alignment where the depth scale of the processed reference frames
+is transferred to the detection frame, only the pixels inside the animal segmentation boundary
+(rather than the entire bounding box) are excluded (Section~\ref{subsubsec:dpt}).
 This is most impactful at very close detection distances where the animal occupies a significantly
 large area of the frame, allowing for a more accurate alignment to be achieved.
 
@@ -67,8 +67,8 @@ calibration requirements.
 
 Firstly, a modification was tested over the whole dataset with DPT distance estimation using both
 bounding box and segmentation detection methods.
-Here, the program's run() method was altered to ignore all calibration frames except those corresponding
-to closest and furthest landmarks from the camera.
+Here, all calibration frames except those corresponding to closest and furthest landmarks from the
+camera where discarded.
 
 \vspace{5mm}
 \textbf{Variable Calibration}
