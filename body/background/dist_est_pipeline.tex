@@ -66,7 +66,7 @@ Each calibration frame depicts a person/object (referred to as a 'landmark') pos
 known distance from the camera.
 Each binary mask corresponds to a single calibration frame and depicts a segmentation of the
 corresponding landmark, where all pixels inside the segmentation are coloured white with all
-remaining pixels being coloured black.
+remaining pixels being coloured black.\cite{HAUCKE2022101536}
 
 \vspace{5mm}
 
@@ -104,7 +104,7 @@ With these computed scales and shifts for each calibration frame, the overall sc
 for the calibration function mapping the raw disparity output to calibrated disparity for the whole camera
 location are calculated such that
 \[
-    (m,c) \approx \argmin_{m,c} \sum_{i=1}^{N} |m \cdot median(m_i \cdot \textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1) + c_i ) + c - \dfrac{1}{z_i}|
+    (m,c) \approx \argmin_{m,c} \sum_{i=1}^{N} |m \cdot \textbf{median}(m_i \cdot \textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1) + c_i ) + c - \dfrac{1}{z_i}|
 \]
 where $\textbf{D}_i^{ref}(\textbf{M}_i^{ref}=1)$ is all pixels in the disparity map $\textbf{D}_i^{ref}$
 enclosed within the binary mask $\textbf{M}_i^{ref}$ and $z_i$ is the ground-truth distance.
@@ -121,8 +121,8 @@ respectively.
 
 Now, the metric distances for the detection frames associated with the camera location can be
 calculated.
-This is done by aligning the depth scale and shift of the raw depth map of the detection frame to
-the overall calibration function derived for the camera location.
+This is done by aligning the depth scale and shift of the raw disparity map of the detection frame to
+that of the overall calibration function previously derived for the camera location.
 The detection frame scale, $m_{obs}$, and shift, $c_{obs}$ are calculated such that
 \[
     (m_{obs},c_{obs}) \approx \argmin_{m_{obs},c_{obs}} |m_{obs} \cdot \textbf{C}_N^{ref}(\textbf{M}_N^{ref}=0) + c_{obs} - \textbf{D}^{obs}(\textbf{M}^{obs}=0)|
@@ -139,7 +139,12 @@ for the detection frame are now given by
     \qquad \mathrm{and} \qquad
     \textbf{Z}^{obs} = \dfrac{1}{\textbf{C}^{obs}}
 \]
-respectively.\cite{HAUCKE2022101536}
+respectively.
+
+For each of the three previously stated minimisation formulae, used to derive the most appropriately
+fitting values for scale and shift as to minimal overall disparity error, the RANSAC fitting method
+is used\cite{HAUCKE2022101536,ransac}.
+
 
 
 \subsubsection{Depth Anything}

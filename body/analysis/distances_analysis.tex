@@ -401,7 +401,8 @@ values to a calibrated disparity\cite{HAUCKE2022101536} that is equal to inverse
 (i.e., distance = 1/calibrated disparity).
 However, if the true relationship between raw disparity and inverse distance is non-linear,
 (e.g., polynomial), a calibration using only the closest and furthest references would result
-in a biasing of distance estimates in the mid-distance region.
+in a biasing of distance estimates, with that largest error corresponding to the mid-distance
+region (where no references were used).
 This effect is visualised in Figure~\ref{fig:disparity_calibration}.
 
 \begin{figure}[H]
