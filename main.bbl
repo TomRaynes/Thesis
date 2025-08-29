@@ -156,6 +156,80 @@ J.~Jia, J.~Kang, L.~Chen, X.~Gao, B.~Zhang, and G.~Yang, ``A comprehensive
   Available: \url{https://www.mdpi.com/2072-4292/17/4/717}
 \BIBentrySTDinterwordspacing
 
+\bibitem{megadetector_article}
+S.~Beery, ``The megadetector: Large-scale deployment of computer vision for
+  conservation and biodiversity monitoring.''
+
+\bibitem{faster_r}
+\BIBentryALTinterwordspacing
+S.~Ren, K.~He, R.~Girshick, and J.~Sun, ``Faster r-cnn: Towards real-time
+  object detection with region proposal networks,'' 2016. [Online]. Available:
+  \url{https://arxiv.org/abs/1506.01497}
+\BIBentrySTDinterwordspacing
+
+\bibitem{multibox}
+\BIBentryALTinterwordspacing
+D.~Erhan, C.~Szegedy, A.~Toshev, and D.~Anguelov, ``Scalable object detection
+  using deep neural networks,'' 2013. [Online]. Available:
+  \url{https://arxiv.org/abs/1312.2249}
+\BIBentrySTDinterwordspacing
+
+\bibitem{md_application1}
+\BIBentryALTinterwordspacing
+J.~Vélez, P.~J. Castiblanco-Camacho, M.~A. Tabak, C.~Chalmers, P.~Fergus, and
+  J.~Fieberg, ``Choosing an appropriate platform and workflow for processing
+  camera trap data using artificial intelligence,'' 2022. [Online]. Available:
+  \url{https://arxiv.org/abs/2202.02283}
+\BIBentrySTDinterwordspacing
+
+\bibitem{md_application2}
+M.~Fennell, C.~Beirne, and C.~Burton, ``Use of object detection in camera trap
+  image identification: Assessing a method to rapidly and accurately classify
+  human and animal detections for research and application in recreation
+  ecology,'' \emph{Global Ecology and Conservation}, vol.~35, p. e02104, 03
+  2022.
+
+\bibitem{bird_classification}
+\BIBentryALTinterwordspacing
+C.~Chalmers, P.~Fergus, S.~Wich, S.~Longmore, N.~Walsh, P.~Stephens,
+  C.~Sutherland, N.~Matthews, J.~Mudde, and A.~Nuseibeh, ``Removing human
+  bottlenecks in bird classification using camera trap images and deep
+  learning,'' \emph{Remote Sensing}, vol.~15, 2023, ePrint Processing Status:
+  Full text deposited in DRO. [Online]. Available:
+  \url{https://durham-repository.worktribe.com/output/1173973}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mae}
+\BIBentryALTinterwordspacing
+K.~He, X.~Chen, S.~Xie, Y.~Li, P.~Dollár, and R.~Girshick, ``Masked
+  autoencoders are scalable vision learners,'' 2021. [Online]. Available:
+  \url{https://arxiv.org/abs/2111.06377}
+\BIBentrySTDinterwordspacing
+
+\bibitem{ViT_detection}
+\BIBentryALTinterwordspacing
+Y.~Li, H.~Mao, R.~Girshick, and K.~He, ``Exploring plain vision transformer
+  backbones for object detection,'' 2022. [Online]. Available:
+  \url{https://arxiv.org/abs/2203.16527}
+\BIBentrySTDinterwordspacing
+
+\bibitem{positional_encoding}
+\BIBentryALTinterwordspacing
+M.~Tancik, P.~Srinivasan, B.~Mildenhall, S.~Fridovich-Keil, N.~Raghavan,
+  U.~Singhal, R.~Ramamoorthi, J.~Barron, and R.~Ng, ``Fourier features let
+  networks learn high frequency functions in low dimensional domains,'' in
+  \emph{Advances in Neural Information Processing Systems}, H.~Larochelle,
+  M.~Ranzato, R.~Hadsell, M.~Balcan, and H.~Lin, Eds., vol.~33.\hskip 1em plus
+  0.5em minus 0.4em\relax Curran Associates, Inc., 2020, pp. 7537--7547.
+  [Online]. Available:
+  \url{https://proceedings.neurips.cc/paper_files/paper/2020/file/55053683268957697aa39fba6f231c68-Paper.pdf}
+\BIBentrySTDinterwordspacing
+
+\bibitem{mlp}
+N.~Jahangeer, S.~Ganesan, and A.~Begum, ``A study on different deep learning
+  algorithms used in deep neural nets: Mlp som and dbn,'' \emph{Wireless
+  Personal Communications}, vol. 128, pp. 2913--2936, 10 2022.
+
 \bibitem{YOLO}
 R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
   features of the popular object detector,'' 07 2024.

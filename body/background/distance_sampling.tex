@@ -1,0 +1,109 @@
+\subsection{Distance Sampling}
+
+Distance sampling is a statistical framework by which the local population density and abundance
+of a species is estimated.
+Two primary methods, 'point' and 'line' transect distance sampling,\cite{distance_sampling_applications}
+exist for this; however, the methodology explored in this project leverages the latter approach.
+
+Here, it is assumed that the true distribution of individuals in the population is evenly distributed
+over the survey area.
+In principle, animal detections are surveyed along the length of a line (transect line) in the
+direction of observation, originating at the observation point (origin).
+For all observed animals, the animal's distance with respect to the origin is recorded.
+An assumption is made that the probability of detecting an animal at distance zero with respect to
+the origin is 1 and that this probability of detection decreases as the animal's distance from the
+origin increases.
+Therefore, to accurately derive an estimate of population density, the detectability of the population
+with respect to distance must be modelled to account for undetected animals.
+
+\subsubsection{Density and Abundance Derivation}
+
+The following summarises the key steps for deriving density and abundance estimates according
+to the comprehensive distance sampling methodology introduced in 'Distance Sampling: Estimating Abundance
+of Biological Populations' (Buckland et al., 1993).\cite{distance_samping}
+
+\vspace{5mm}
+\textbf{The Detection Function}
+
+The detection function, $g(y)$, describes the probability that a given animal will be detected
+at distance $y$ from the origin.
+The observed distances are grouped into distance interval bins that cover the range of observed distances
+(e.g., 0–1 m, 1–2 m, \ldots) up to the furthest considered distance, $w$, known as the truncation distance.
+To estimate density, a detection function is fitted to model the observed distribution of detection
+distances over the transect line.
+
+[Figure]
+
+The 'wellness of fit' of several detection function candidates is assessed.
+A variety of candidates can be used; however, common candidates include the half-normal and
+hazard-rate distributions, given by
+\[
+    g(y) = e^{-\frac{y^2}{2\sigma^2}} \qquad \mathrm{and} \qquad g(y) = 1 - e^{-(\frac{y}{\sigma})^{-\beta}}
+\]
+respectively, where $\sigma$ and $\beta$ are determined parameters that maximise the wellness of fit
+of the given candidate function to the distribution of observed distances.
+To determine the parameterisation of a candidate function, these parameters are varied and the wellness
+of fit of the specific parameterisation is assessed.
+
+\vspace{5mm}
+\textbf{The Probability Density Function}
+
+To do this, the probability density function, $f(y)$, is derived for the parameterised candidate function,
+given by
+\[
+    f(y) = \dfrac{g(y)}{\mu} \mathrm{,} \qquad \mathrm{where} \qquad \mu = \int_{0}^{w} g(y) \, dy \mathrm{.}
+\]
+The probability density function is a measure of the distribution of observed detections, i.e.,
+given an animal is detected between zero and $w$ meters, the probability of the detection distance
+being $y$ meters.
+
+\vspace{5mm}
+\textbf{Wellness of Fit Assessment}
+
+The likelihood, $L$, of the probability density function, $f(y)$, is then calculated to determine the wellness
+of fit of the corresponding detection function, $g(y)$.
+This is given by
+\[
+    L = \prod_{i=1}^n f(y_i)\mathrm{,}
+\]
+where $y_i$ is the $i^{\mathrm{th}}$ observed distance and $n$ is the total number of observations.
+Here, the likelihood gives a measure of the likelihood of the observed distribution of distances
+arising, given that true detectability is modelled by the fitted detection function, $g(y)$.
+As such, the appropriate parameters of the candidate function are determined to be those that result
+in the maximisation of the corresponding likelihood, $L$.
+Parameters for each of the candidate functions are determined using this approach.
+
+Now with a set of parameterised candidate functions, the final detection function, $g(y)$, can be
+determined by calculating the Akaike information criterion, AIC, for each of the candidate functions.
+This is given by
+\[
+    \mathrm{AIC} = 2q - 2ln(L) \mathrm{,}
+\]
+where $L$ is the likelihood resulting from the given candidate function and $q$ is the number of
+parameters of the given candidate function.
+Here, $ln(L)$, is referred to as the 'log-likelihood' and gives a measure of the wellness of fit of
+the given candidate function.
+Conversely, $q$ is a measure of complexity of the given candidate function and contributes to a
+'penalty' term in the equation.
+A such, the final detection function, $g(y)$, is determined to be the candidate function that gives
+the lowest AIC value.
+
+\vspace{5mm}
+\textbf{Density and Abundance Estimates}
+
+Density, $D$, is then given by
+\[
+    D = \dfrac{n}{2 \mu L} \mathrm{,} \qquad \mathrm{where} \qquad \mu = \int_{0}^{w} g(y) \, dy \mathrm{,}
+\]
+where $n$ is the total number of observed individuals, $L$ is the total length of the transect line
+and $w$ is the truncation distance.
+Abundance, $N$, is then given by
+\[
+    N = D \cdot A \mathrm{,}
+\]
+where $D$ is density and $A$ is area.
+
+
+
+\subsubsection{Software Implementation}
+
