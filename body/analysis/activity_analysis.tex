@@ -36,7 +36,7 @@ This gives the overall trend of a decrease in activity from MANUAL $\rightarrow$
 DPT/SEG $\rightarrow$ DA/BBOX $\rightarrow$ DA/SEG\@.
 This trend can be rationalised by considering how distance influences estimated density.
 
-In essence, density estimation hinges on fitting a detection function, $g(x)$, to the distribution
+In essence, density estimation hinges on fitting a detection function, $g(r)$, to the distribution
 of observed distances.
 The gives the probability that a particular individual will be detected at a given distance, giving
 a measure of how detection probability decays with distance.
@@ -58,13 +58,14 @@ for an increased probability of detection at far distances (Figure~\ref{fig:dete
 
 Density, $D$, is given by the equation
 \[
-    D = \dfrac{n}{2L \cdot \displaystyle \int_{0}^{w} g(y) \, dy}
+    D = \dfrac{n}{2k\pi \cdot \displaystyle \int_{0}^{w} r \cdot g(r) \, dr}
 \]
-where $n$ is the number of detected individuals, $L$ is the transect length and $w$ is the far
+where $n$ is the number of detected individuals, $k$ is the number of transects and $w$ is the far
 truncation distance corresponding to the furthest considered distance\cite{distance_samping}.
-This shows that density is inversely proportional to the area under the detection function curve
-given by $\int_{0}^{w} g(y) \, dy$, demonstrating that systematic overestimation of distance will
-lead to lower density estimates.
+It is recognised that the resulting value of integral $\int_{0}^{w} r \cdot g(r) \, dr$ scales
+with area under the detection function curve (i.e., $\int_{0}^{w} g(r) \, dr$).
+This shows, therefore, that density is inversely proportional to the area under the detection function
+curve, demonstrating that systematic overestimation of distance will lead to lower density estimates.
 
 As seen previously in Figure~\ref{tab:overall_errors} (Section~\ref{subsubsec:distance_comparison}),
 the $\Delta_{average}$ values (measure of over/under-prediction relative to manual) of these

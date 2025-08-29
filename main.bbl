@@ -230,12 +230,16 @@ N.~Jahangeer, S.~Ganesan, and A.~Begum, ``A study on different deep learning
   algorithms used in deep neural nets: Mlp som and dbn,'' \emph{Wireless
   Personal Communications}, vol. 128, pp. 2913--2936, 10 2022.
 
-\bibitem{YOLO}
-R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
-  features of the popular object detector,'' 07 2024.
+\bibitem{distance_sampling_applications}
+R.-E. M.~T. Buckland, S.T. and C.~Oedekoven, \emph{Distance Sampling: Methods
+  and Applications}, 2015.
 
 \bibitem{distance_samping}
 S.~Buckland, D.~Anderson, K.~Burnham, and J.~Laake, \emph{Distance Sampling:
   Estimating Abundance of Biological Populations}, 01 1993, vol.~50.
+
+\bibitem{YOLO}
+R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
+  features of the popular object detector,'' 07 2024.
 
 \end{thebibliography}
