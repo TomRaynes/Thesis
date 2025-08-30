@@ -238,6 +238,49 @@ R.-E. M.~T. Buckland, S.T. and C.~Oedekoven, \emph{Distance Sampling: Methods
 S.~Buckland, D.~Anderson, K.~Burnham, and J.~Laake, \emph{Distance Sampling:
   Estimating Abundance of Biological Populations}, 01 1993, vol.~50.
 
+\bibitem{ds_design}
+\BIBentryALTinterwordspacing
+L.~Thomas, S.~T. Buckland, E.~A. Rexstad, J.~L. Laake, S.~Strindberg, S.~L.
+  Hedley, J.~R. Bishop, T.~A. Marques, and K.~P. Burnham, ``Distance software:
+  design and analysis of distance sampling surveys for estimating population
+  size,'' \emph{Journal of Applied Ecology}, vol.~47, no.~1, pp. 5--14, 2010.
+  [Online]. Available:
+  \url{https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-2664.2009.01737.x}
+\BIBentrySTDinterwordspacing
+
+\bibitem{whs}
+\BIBentryALTinterwordspacing
+W.~Heritage. (2025) Taï national park. [Online]. Available:
+  \url{https://whc.unesco.org/en/soc/4205}
+\BIBentrySTDinterwordspacing
+
+\bibitem{tnp_deforestation}
+\BIBentryALTinterwordspacing
+C.~Chatelain, A.~Bakayoko, P.~Martin, and L.~Gautier, ``Monitoring tropical
+  forest fragmentation in the zagn{\'e}-ta{\"\i}area (west of ta{\"\i}national
+  park, c{\^o}te d'ivoire),'' \emph{Biodiversity and Conservation}, vol.~19,
+  no.~8, pp. 2405--2420, 2010. [Online]. Available:
+  \url{https://doi.org/10.1007/s10531-010-9847-4}
+\BIBentrySTDinterwordspacing
+
+\bibitem{wcf_conservation}
+K.~P. N'Goran, C.~Kouakou, E.~N’Goran, S.~Konaté, I.~Herbinger, F.~Yapi,
+  H.~Kühl, and C.~Boesch, ``Chimpanzee conservation status in the world
+  heritage site taï national park, côte d’ivoire,'' \emph{International
+  Journal of Innovation and Applied Studies}, vol.~3, pp. 326--336, 05 2013.
+
+\bibitem{anti_poaching}
+Y.~A. Kablan, A.~Diarrassouba, R.~Mundry, G.~Campbell, E.~Normand, H.~S. Kühl,
+  I.~Koné, and C.~Boesch, ``Effects of anti-poaching patrols on the
+  distribution of large mammals in taï national park, côte d’ivoire,''
+  \emph{Oryx}, vol.~53, no.~3, p. 469–478, 2019.
+
+\bibitem{wcf}
+\BIBentryALTinterwordspacing
+W.~C. Foundation. (2025) Wild chimpanzee foundation. [Online]. Available:
+  \url{https://www.wildchimps.org}
+\BIBentrySTDinterwordspacing
+
 \bibitem{YOLO}
 R.~Khanam and M.~Hussain, ``What is yolov5: A deep look into the internal
   features of the popular object detector,'' 07 2024.
