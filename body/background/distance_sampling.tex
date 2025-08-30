@@ -129,5 +129,29 @@ where $D$ is density and $A$ is the total area surveyed.
 
 \subsubsection{Software Implementation for Camera Traps}
 
+In practice, this project processes automated distance observation data with a script used
+previously by practitioners with manually estimated data.
+This was supplied with the dataset (Section~\ref{subsubsec:dataset}).
+The script follows the same fundamental principles; however, adaptations are made to cater
+to estimates derived from camera trap video.
 
+Firstly, like all conventional cameras, camera traps capture a specific field of view (FOV).
+This is used to scale the effective area, $A_e$, of the point transect.
+In this case cameras with a FOV of 38\textdegree are used, so this is scaled to a fraction
+of 38/360.
+Additionally, as camera traps operate 24 hours per day, the script uses detection timestamps
+with temporal operation metadata to model the behaviour of the population to derive an availability
+factor (activity).
+Density, $D$, then inversely scales with both availability and operation time.\cite{ct_distance_sampling}
+
+\vspace{5mm}
+\textbf{Bootstrap Calculations}
+
+The script also performs a number of bootstrapping operations to the data.
+This involves resampling the data many times (50 times in this case) and re calculating the
+density and abundance estimates each time.
+This gives a distribution of many estimates from which standard error and variance can be assessed.
+Ultimately, this gives a more complete picture of the robustness and sensitivity of the density and
+abundance estimates to random variations in the data, giving a better description of
+uncertainty.\cite{distance_samping}
 

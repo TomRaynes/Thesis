@@ -248,6 +248,15 @@ L.~Thomas, S.~T. Buckland, E.~A. Rexstad, J.~L. Laake, S.~Strindberg, S.~L.
   \url{https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-2664.2009.01737.x}
 \BIBentrySTDinterwordspacing
 
+\bibitem{ct_distance_sampling}
+\BIBentryALTinterwordspacing
+N.~Cappelle, E.~J. Howe, C.~Boesch, and H.~S. Kühl, ``Estimating animal
+  abundance and effort–precision relationship with camera trap distance
+  sampling,'' \emph{Ecosphere}, vol.~12, no.~1, p. e03299, 2021. [Online].
+  Available:
+  \url{https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1002/ecs2.3299}
+\BIBentrySTDinterwordspacing
+
 \bibitem{whs}
 \BIBentryALTinterwordspacing
 W.~Heritage. (2025) Taï national park. [Online]. Available:
@@ -262,6 +271,11 @@ C.~Chatelain, A.~Bakayoko, P.~Martin, and L.~Gautier, ``Monitoring tropical
   no.~8, pp. 2405--2420, 2010. [Online]. Available:
   \url{https://doi.org/10.1007/s10531-010-9847-4}
 \BIBentrySTDinterwordspacing
+
+\bibitem{biodiversity}
+N.~Myers, R.~Mittermeier, C.~Mittermeier, G.~Fonseca, and J.~Kent,
+  ``Biodiversity hotspot for conservation priorities,'' \emph{Nature}, vol.
+  403, pp. 853--8, 03 2000.
 
 \bibitem{wcf_conservation}
 K.~P. N'Goran, C.~Kouakou, E.~N’Goran, S.~Konaté, I.~Herbinger, F.~Yapi,
