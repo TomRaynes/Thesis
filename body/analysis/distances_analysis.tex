@@ -51,7 +51,7 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     \caption{Mean average error (MAE), root mean squared error (RMSE), average difference between
     model and manual estimate ($\Delta_{average}$) and result of Wilcoxon signed rank test for
     statistical difference. These data describe all distance estimates for each pipeline
-    configuration collectivelly.)}
+    configuration collectivelly.}
     \label{tab:overall_errors}
     \begin{tabular}{ccccc}
         \textbf{Method} & \textbf{MAE / m} & \textbf{RMSE / m} & \textbf{$\Delta_{average}$ / m}
@@ -252,6 +252,16 @@ than the individual.
     \label{fig:haze_occluded}
 \end{figure}
 
+Additionally, the consequence of segmentation leading to a steeper regression line (relating
+modelled and manual distance) may also explain the large increase in absolute error when comparing
+Depth Anything's segmentation results to its bounding box results.
+Here, this results in a lack of intersection between the segmentation regression line with
+the ideal which indicates that, over all distances, the difference between the
+corresponding modelled and manual data are greater than for the other configurations where
+an intersection occurs.
+This is also supported by noticing that the MAE and $\Delta_{average}$ for this configuration
+are very close in value, implying that most estimates are over-predicted.
+
 \vspace{5mm}
 \textbf{Depth Model Effects}
 
@@ -333,7 +343,7 @@ djou09
 
 \clearpage
 
-\subsubsection{Effects of Varying Calibration}
+\subsubsection{Ablation Studies}\label{subsubsec:var_cal}
 
 \textbf{Exclusive Close/Far Reference Calibration}
 

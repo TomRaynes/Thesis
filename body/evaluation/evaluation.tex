@@ -1,28 +1,130 @@
 \section{Evaluation and Conclusions}
 
-Improvement over fully manual approach?
+The analyses of results obtained using the methodology proposed in this study show great
+promise for the future of conservational biomonitoring.
+It is shown that application of current state-of-the-art monocular depth estimation
+frameworks in conjunction with modern distance sampling can produce estimates of population
+density and abundance on the order of those derived in the convention manner.
+Most importantly though, the time and labour commitments necessitated by this methodology
+are orders of magnitude lower.
+Manual distance estimation across a dataset of the size used in this study may take weeks,
+even months, depending on available resources.
+The pipeline explored in this study achieves this in hours.
+Nevertheless, methodology must continue to be adapted with the emergence of novel models
+and technologies before it can become convention.
 
-Bottlenecks, calibration frame preparation, available compute
+\subsection{Roadblocks and Bottlenecks}
+
+This study has found that, when outsourcing distance estimation to an automated pipeline,
+resulting estimates for density and abundance consistently fall below those using manual
+distances.
+However, the greatest barrier that must be overcome here is not error in distance estimates,
+although this remains important, but the endeavour of detection itself.
+This is certainly true for, at least, this dataset.
+It is inevitable that automated detection will result in misses, but the frequency of these
+is significant and noticeably impacts estimated density since misses occur over a range
+of distances, diminishing the effectiveness of the fitted detection function to account
+for them.
+
+Fundamentally, detections are missed because of a lack of contextual cues in detection
+frames.
+Using the manual approach, the human annotator has additional context from subsequent and
+previous video frames.
+Future studies may attempt to replicate this idea in the distance estimation pipeline.
+As it stands, the pipeline of this study uses Mega Detector to identify detections
+in extracted frames.
+Suppose instead that animal bounding boxes are tracked, continuously, throughout the
+duration of the camera track video using, for example, YOLOv8.\cite{YOLOv8}
+The positions of these bounding boxes may then be sampled at intervals corresponding to the
+extracted frames and then processed with the depth data in an equivalent manner.
+This method is likely to lower the frequency of misses but by how much is yet to be seen.
+
+Somewhat of a bottleneck in this methodology is the preparation of the DPT calibration
+material (i.e., calibration frames and binary masks).
+The time requirement for preparing these is certainly a huge improvement over time saved
+manually annotating detection distances, but is still significant, most especially for
+binary mask preparation which took approximately a week to complete.
+As discussed, the automated masking method in Section~\ref{subsubsec:mask_creation} yields
+inconsistent results, highlighting the need for refinement here.
+The custom-built calibration frame extractor software, as seen in Section~\ref{fig:frame_extractor},
+proved to be of great success however, allowing for all raw calibration frames to be extracted at a
+significantly increased rate.
+
+
+available compute
 
 Time saved using frame extractor, preserves exact pixels
 
-Limitations of the environment
-
-Calibration and detection frame image resolution
-
-Depth estimation point consistency (the animal itself has depth)
-
-Error in reference videos (person has depth, not always standing up straight)
-
-Better calibration (polynomial/not just linear, more calibration frames)
-
-DTP fine tuning calibration the specific camera location lead to greater accuracy.
-
-Practitioners are not concern with manual truncation, binning and model fitting for density
+Practitioners are not concerned with manual truncation, binning and model fitting for density
 estimation as these require minimal effort.
 
-Ballpark activity estimates
+Limitations of the environment\\
+Missed detections = low density, aka mega detector is shite\\
+Future work, use detector model that tracks animal bounding boxes through video to extract
+bounding boxes, gives more context, less misses, better density estimates.
 
-Future work
+\subsection{Optimising Estimates}
 
-Closing remarks
+When applied to this dataset, DPT outperforms Depth Anything with regard absolute error of
+distance estimates.
+Additionally, while both models over-predict distance to some degree, the skew is much more
+neutral in the case of DPT, in comparison to Depth Anything which significantly over-predicts.
+As explained in Section~\ref{subsubsec:configuration_effects}, this leads to DPT being the
+better choice of distance estimation model for achieving density and abundance results that are
+most reflective of the ground-truth.
+At a high level, this makes sense given that DPT output is specifically calibrated
+to each individual camera location and is therefore a better description of the environment.
+Future studies may show interesting results if a similar reference frame style calibration
+is to be applied to the Depth Anything.
+This has the potential to produce better estimates of density and abundance than DPT,
+given Depth Anything's reasonable performance without calibration and its ability better
+capture fine detail in depth contrast than DPT\@.
+
+In Section~\ref{subsubsec:var_cal}, it was demonstrated that, when DPT is calibrated using
+only the closest and furthest reference frame, the estimated distances of close pixel are
+underestimated, while those of far pixels are overestimated.
+In an attempt to explain this, a hypothesis was proposed theorising that the true relationship
+between DPT outputted disparity and metric disparity follows a non-linear mapping.
+To the best of the knowledge of the author, the literature contains no studies that map
+DPT disparity to metric disparity.
+As such, this relationship should be investigated.
+Besides validation this hypothesis, evidence of non-linearity would give insight into improved
+methods of DPT calibration for more robust predictions.
+
+More calibration frames
+
+
+All in all, considering performance as well as necessitated setup requirements, it should be understood that
+both distance estimation models have their own unique benefits and draw-backs.
+
+
+
+
+
+
+Depth estimation point consistency (the animal itself has depth)\\
+Error in reference videos (person has depth, not always standing up straight)
+
+
+Better calibration (polynomial/not just linear, more calibration frames – across frame width,
+shorter distance intervals)\\
+Future work should determine true disparity relationship, indicated by the reduced calibration
+
+Calibration and detection frame image resolution?
+
+
+\subsection{Closing Remarks}
+
+Summary of work
+
+Novel
+
+Improvement over fully manual approach?
+
+Ballpark density and abundance estimates\\
+MDE and detection models are always improving and estimates will only improve
+
+Significant time improvement
+
+Distance pipeline requires work to lower rate of missed detections which skews density estimates
+
