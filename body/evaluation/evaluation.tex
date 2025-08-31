@@ -4,16 +4,18 @@ The analyses of results obtained using the methodology proposed in this study sh
 promise for the future of conservational biomonitoring.
 It is shown that application of current state-of-the-art monocular depth estimation
 frameworks in conjunction with modern distance sampling can produce estimates of population
-density and abundance on the order of those derived in the convention manner.
+density and abundance on the order of those derived in the conventional manner.
 Most importantly though, the time and labour commitments necessitated by this methodology
 are orders of magnitude lower.
 Manual distance estimation across a dataset of the size used in this study may take weeks,
 even months, depending on available resources.
 The pipeline explored in this study achieves this in hours.
-Nevertheless, methodology must continue to be adapted with the emergence of novel models
-and technologies before it can become convention.
+Nevertheless, the methodology must continue to be improved and adapted with the emergence
+of novel models and technologies before it can become convention.
 
 \subsection{Roadblocks and Bottlenecks}
+
+\subsubsection{Detection}
 
 This study has found that, when outsourcing distance estimation to an automated pipeline,
 resulting estimates for density and abundance consistently fall below those using manual
@@ -23,8 +25,7 @@ although this remains important, but the endeavour of detection itself.
 This is certainly true for, at least, this dataset.
 It is inevitable that automated detection will result in misses, but the frequency of these
 is significant and noticeably impacts estimated density since misses occur over a range
-of distances, diminishing the effectiveness of the fitted detection function to account
-for them.
+of distances, diminishing the ability to compensate for these with distance sampling.
 
 Fundamentally, detections are missed because of a lack of contextual cues in detection
 frames.
@@ -34,10 +35,18 @@ Future studies may attempt to replicate this idea in the distance estimation pip
 As it stands, the pipeline of this study uses Mega Detector to identify detections
 in extracted frames.
 Suppose instead that animal bounding boxes are tracked, continuously, throughout the
-duration of the camera track video using, for example, YOLOv8.\cite{YOLOv8}
-The positions of these bounding boxes may then be sampled at intervals corresponding to the
-extracted frames and then processed with the depth data in an equivalent manner.
-This method is likely to lower the frequency of misses but by how much is yet to be seen.
+duration of the camera trap video.
+Here, an object detector, e.g., YOLOv8,\cite{YOLOv8} may be used to generate bounding
+boxes while missed detections can be inferred and corresponding bounding boxes predicted
+using an object tracking algorithm, e.g., DeepSORT\@.\cite{deepsort}
+This approach has already shown impressive results the biomonitoring space.\cite{detection_pipeline}
+These bounding boxes may then be sampled in correspondence to the
+extracted frames (i.e. frames used for MDE) and then processed with the depth data in an
+equivalent manner.
+This method will certainly lower the frequency of misses; however, its effect on subsequent
+density and abundance estimates is yet to be seen.
+
+\subsubsection{Calibration Frame Preparation}
 
 Somewhat of a bottleneck in this methodology is the preparation of the DPT calibration
 material (i.e., calibration frames and binary masks).
@@ -50,20 +59,18 @@ The custom-built calibration frame extractor software, as seen in Section~\ref{f
 proved to be of great success however, allowing for all raw calibration frames to be extracted at a
 significantly increased rate.
 
+\subsubsection{Density / Abundance Pre-Processing}
 
-available compute
-
-Time saved using frame extractor, preserves exact pixels
-
-Practitioners are not concerned with manual truncation, binning and model fitting for density
-estimation as these require minimal effort.
-
-Limitations of the environment\\
-Missed detections = low density, aka mega detector is shite\\
-Future work, use detector model that tracks animal bounding boxes through video to extract
-bounding boxes, gives more context, less misses, better density estimates.
+One might imagine that the pre-processing of distance observation/estimation data for use in the population
+density and abundance estimation script would also constitute somewhat of a bottleneck (i.e., truncation,
+binning, calculating wellness of fit).
+While this does still require some manual human input, it is generally the view of practitioners that
+the primary contemporary concern is to overcome the distance estimation bottleneck, as the labour
+requirements of pre-processing are but a fraction of those required for distance estimation.
 
 \subsection{Optimising Estimates}
+
+\subsubsection{MDE Models}
 
 When applied to this dataset, DPT outperforms Depth Anything with regard absolute error of
 distance estimates.
@@ -75,43 +82,37 @@ most reflective of the ground-truth.
 At a high level, this makes sense given that DPT output is specifically calibrated
 to each individual camera location and is therefore a better description of the environment.
 Future studies may show interesting results if a similar reference frame style calibration
-is to be applied to the Depth Anything.
-This has the potential to produce better estimates of density and abundance than DPT,
-given Depth Anything's reasonable performance without calibration and its ability better
-capture fine detail in depth contrast than DPT\@.
+were to be applied to the Depth Anything.
+This has the potential to produce even better estimates of density and abundance than DPT,
+given Depth Anything's reasonable performance without calibration and its ability to better
+capture fine detail in depth contrast than DPT (Section~\ref{subsubsec:distance_comparison}).
+
+\subsubsection{Model Calibration}
 
 In Section~\ref{subsubsec:var_cal}, it was demonstrated that, when DPT is calibrated using
-only the closest and furthest reference frame, the estimated distances of close pixel are
+only the closest and furthest reference frame, the estimated distances of close pixels are
 underestimated, while those of far pixels are overestimated.
 In an attempt to explain this, a hypothesis was proposed theorising that the true relationship
 between DPT outputted disparity and metric disparity follows a non-linear mapping.
 To the best of the knowledge of the author, the literature contains no studies that map
 DPT disparity to metric disparity.
 As such, this relationship should be investigated.
-Besides validation this hypothesis, evidence of non-linearity would give insight into improved
+Besides validating this hypothesis, evidence of non-linearity would give insight into improved
 methods of DPT calibration for more robust predictions.
 
-More calibration frames
+Additionally, better calibrations may be achieved simply through the implementation of expanded
+referencing for refined calibration.
+Decreasing the distance interval by which references are recorded is likely to show some positive
+effects on estimate error through minimisation of outlier influence.
+Furthermore, an interesting avenue of study may be the use of multiple references per distance
+interval, where these references are recorded at a variety of positions in the frame spanning its
+width.
 
-
-All in all, considering performance as well as necessitated setup requirements, it should be understood that
-both distance estimation models have their own unique benefits and draw-backs.
-
-
-
-
-
-
-Depth estimation point consistency (the animal itself has depth)\\
-Error in reference videos (person has depth, not always standing up straight)
-
-
-Better calibration (polynomial/not just linear, more calibration frames – across frame width,
-shorter distance intervals)\\
-Future work should determine true disparity relationship, indicated by the reduced calibration
-
-Calibration and detection frame image resolution?
-
+Having said this, the caveat here is that, while this may produce better estimates, the
+aforementioned calibration frame preparation bottleneck would become expanded.
+Consequently, these factors must be balanced accordingly to some degree; although, with the current
+capabilities of monocular depth estimation technology, it follows that optimised calibrations
+are most desirable as to minimise the error of distance estimates.
 
 \subsection{Closing Remarks}
 
@@ -127,4 +128,10 @@ MDE and detection models are always improving and estimates will only improve
 Significant time improvement
 
 Distance pipeline requires work to lower rate of missed detections which skews density estimates
+
+All in all, considering performance as well as necessitated setup requirements, it should be understood that
+both distance estimation models have their own unique benefits and draw-backs.
+
+Depth estimation point consistency (the animal itself has depth)\\
+Error in reference videos (person has depth, not always standing up straight)
 

@@ -32,7 +32,7 @@ pixel sampling.
 
 DPT, introduced by Ranftl et al.\cite{dpt}, is a (novel at conception) deep learning architecture
 for dense prediction tasks, adapting the conventional convolutional encoder/decoder architecture
-typically used for dense prediction\cite{segmentation_CNN,invariant_CNNs}
+used for dense prediction\cite{segmentation_CNN,invariant_CNNs}
 (i.e., the labelling of all pixels in an image), by substituting the encoder with a series of staged
 vision transformers\cite{vision_transformer,transformer}.
 This proves to be beneficial for tasks involving dense prediction (i.e., MDE) as the network retains
@@ -46,7 +46,7 @@ in a loss of detail at deeper layers where the context is larger\cite{dpt,invari
 
 The vision transformer backbone of the network is pretrained with weights obtained using the ImageNet
 dataset while the convolutional decoder weights are randomised\cite{dpt,imagenet}.
-For the application to MDE in this pipeline, the model is trained on an extremely large aggregate
+For the application to MDE in this pipeline, the model is trained on a large aggregate
 dataset of approximately 1.4 million images, leveraging a technique referred to as 'zero-shot
 cross dataset transfer'.
 This technique employs loss functions that are compatible with training data obtained using a range
