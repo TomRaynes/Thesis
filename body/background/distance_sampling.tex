@@ -140,9 +140,12 @@ This is used to scale the effective area, $A_e$, of the point transect.
 In this case, cameras with a FOV of 38\textdegree are used, so this is scaled to a fraction
 of 38/360.
 Additionally, as camera traps operate 24 hours per day, the script uses detection timestamps
-with temporal operation metadata to model the behaviour of the population to derive an availability
-factor (activity).
-Density, $D$, then inversely scales with both availability and operation time.\cite{ct_distance_sampling}
+with temporal operation metadata to model the daily behaviour of the population to derive an
+availability factor (activity).
+This is derived by fitting the probability density function, $f(r)$, to a distribution of
+radian time-of-day observations.
+Density, $D$, then inversely scales with both activity and operation
+time.\cite{ct_distance_sampling_1,ct_distance_sampling_2}
 
 \vspace{5mm}
 \textbf{Bootstrap Calculations}

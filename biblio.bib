@@ -438,7 +438,7 @@ author = {Chalmers, C. and Fergus, P. and Wich, S. and Longmore, S.N. and Walsh,
     doi = {10.1038/35002501}
 }
 
-@article{ct_distance_sampling,
+@article{ct_distance_sampling_1,
     author = {Cappelle, Noémie and Howe, Eric J. and Boesch, Christophe and Kühl, Hjalmar S.},
     title = {Estimating animal abundance and effort–precision relationship with camera trap distance sampling},
     journal = {Ecosphere},
@@ -452,6 +452,23 @@ author = {Chalmers, C. and Fergus, P. and Wich, S. and Longmore, S.N. and Walsh,
     abstract = {Abstract Effective monitoring methods are needed for assessing the state of biodiversity and detecting population trends. The popularity of camera trapping in wildlife surveys continues to increase as they are able to detect species in remote and difficult-to-access areas. As a result, several statistical estimators of the abundance of unmarked animal populations have been developed, but none have been widely tested. Even where the potential for accurate estimation has been demonstrated, whether these methods estimators can yield estimates of sufficient precision to detect trends and inform conservation action remains questionable. Here, we assess the effort–precision relationship of camera trap distance sampling (CTDS) in order to help researchers design efficient surveys. A total of 200 cameras were deployed for 10 months across 200 km2 in the Taï National Park, Côte d'Ivoire. We estimated abundance of Maxwell's duikers, western chimpanzees, leopards, and forest elephants that are challenging to enumerate due to rarity or semi-arboreality. To test the effects of spatial and temporal survey effort on the precision of CTDS estimates, we calculated coefficient of variation (CV) of the encounter rate from subsets of our complete data sets. Estimated abundance of leopard and Maxwell's duiker density (20\% < CV < 30\% and CV = 11\%, respectively) were similar to prior estimates from the same area. Abundances of chimpanzees (20\% < CV < 30\%) were underestimated, but the quality of inference was similar to that reported after labor-intensive line transect surveys to nests. Estimates for the rare forest elephants were potentially unreliable since they were too imprecise (60\% < CV < 200\%). Generalized linear models coefficients indicated that for relatively common, ground-dwelling species, CVs between 10\% and 20\% are achievable from a variety of survey designs, including long-term (6+ months) surveys at few locations (50), or short term (2-week to 2-month) surveys at 100–150 locations. We conclude that CTDS can efficiently provide estimates of abundance of multiple species of sufficient quality and precision to inform conservation decisions. However, estimates for the rarest species will be imprecise even from ambitious surveys and may be biased for species that exhibit strong reactions to cameras.},
     year = {2021}
 }
+
+@article{ct_distance_sampling_2,
+    author = {Rowcliffe, J. Marcus and Kays, Roland and Kranstauber, Bart and Carbone, Chris and Jansen, Patrick A.},
+    title = {Quantifying levels of animal activity using camera trap data},
+    journal = {Methods in Ecology and Evolution},
+    volume = {5},
+    number = {11},
+    pages = {1170-1179},
+    keywords = {activity level, activity time, circular kernel, proportion active, remote sensors, Von Mises distribution, weighted kernel},
+    doi = {https://doi.org/10.1111/2041-210X.12278},
+    url = {https://besjournals.onlinelibrary.wiley.com/doi/abs/10.1111/2041-210X.12278},
+    eprint = {https://besjournals.onlinelibrary.wiley.com/doi/pdf/10.1111/2041-210X.12278},
+    abstract = {Summary Activity level (the proportion of time that animals spend active) is a behavioural and ecological metric that can provide an indicator of energetics, foraging effort and exposure to risk. However, activity level is poorly known for free-living animals because it is difficult to quantify activity in the field in a consistent, cost-effective and non-invasive way. This article presents a new method to estimate activity level with time-of-detection data from camera traps (or more generally any remote sensors), fitting a flexible circular distribution to these data to describe the underlying activity schedule, and calculating overall proportion of time active from this. Using simulations and a case study for a range of small- to medium-sized mammal species, we find that activity level can reliably be estimated using the new method. The method depends on the key assumption that all individuals in the sampled population are active at the peak of the daily activity cycle. We provide theoretical and empirical evidence suggesting that this assumption is likely to be met for many species, but may be less likely met in large predators, or in high-latitude winters. Further research is needed to establish stronger evidence on the validity of this assumption in specific cases; however, the approach has the potential to provide an effective, non-invasive alternative to existing methods for quantifying population activity levels.},
+    year = {2014}
+}
+
+
 
 @InProceedings{YOLOv8,
     author="Sohan, Mupparaju and Sai Ram, Thotakura and Rami Reddy, Ch. Venkata",
@@ -485,7 +502,23 @@ author = {Chalmers, C. and Fergus, P. and Wich, S. and Longmore, S.N. and Walsh,
     number={},
     pages={1-6},
     keywords={Insects;Biological system modeling;Wildlife;Lighting;Object detection;Ecology;Behavioral sciences;Wildlife tracking;object detection;tracking algorithms;YOLOv8;Deep SORT;butterfly tracking;squirrel tracking;ecological research;conservation;animal behavior},
-    doi={10.1109/GCAT59970.2023.10353296}}
+    doi={10.1109/GCAT59970.2023.10353296}
+}
+
+@article{full_pipeline_study,
+    author = {Henrich, Maik and Burgueño, Mercedes and Hoyer, Jacqueline and Haucke, Timm and Steinhage, Volker and Kühl, Hjalmar S. and Heurich, Marco},
+    title = {A semi-automated camera trap distance sampling approach for population density estimation},
+    journal = {Remote Sensing in Ecology and Conservation},
+    volume = {10},
+    number = {2},
+    pages = {156-171},
+    keywords = {Artificial intelligence, camera trap distance sampling, detection probability, observation distances, population density estimation, wildlife monitoring},
+    doi = {https://doi.org/10.1002/rse2.362},
+    url = {https://zslpublications.onlinelibrary.wiley.com/doi/abs/10.1002/rse2.362},
+    eprint = {https://zslpublications.onlinelibrary.wiley.com/doi/pdf/10.1002/rse2.362},
+    abstract = {Abstract Camera traps have become important tools for the monitoring of animal populations. However, the study-specific estimation of animal detection probabilities is key if unbiased abundance estimates of unmarked species are to be obtained. Since this process can be very time-consuming, we developed the first semi-automated workflow for animals of any size and shape to estimate detection probabilities and population densities. In order to obtain observation distances, a deep learning algorithm is used to create relative depth images that are calibrated with a small set of reference photos for each location, with distances then extracted for animals automatically detected by MegaDetector 4.0. Animal detection by MegaDetector was generally independent of the distance to the camera trap for 10 animal species at two different study sites. If an animal was detected both manually and automatically, the difference in the distance estimates was often minimal at a distance about 4 m from the camera trap. The difference increased approximately linearly for larger distances. Nonetheless, population density estimates based on manual and semi-automated camera trap distance sampling workflows did not differ significantly. Our results show that a readily available software for semi-automated distance estimation can reliably be used within a camera trap distance sampling workflow, reducing the time required for data processing, by >13-fold. This greatly improves the accessibility of camera trap distance sampling for wildlife research and management.},
+    year = {2024}
+}
 
 
 
