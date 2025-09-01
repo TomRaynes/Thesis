@@ -1,3 +1,19 @@
 \part*{Abstract}
 
-[Abstract]
+Abundance and density data of unmarked animal populations are often estimated with camera trap
+distance sampling.
+Fundamentally, this relies on obtaining animal-to-camera distance data for each observation,
+involving slow and inefficient methods of manual and subjective distance estimation.
+This study investigates a novel and virtually unexplored approach to abundance/density estimation,
+where a monocular depth estimation (MDE) pipeline was applied to a camera trap dataset to obtain detection
+distance estimates which were subsequently used to model the density and abundance of the local population.
+Estimates derived using two MDE models (DPT and Depth Anything) with two pixel depth sampling methods were
+obtained, analysing all distance, density and abundance estimates from each workflow configuration.
+The results show that calibrated DPT outperforms Depth anything for both distance and
+density/abundance estimation when applied to this dataset; however, both models generally overestimate
+distance and underestimate density/abundance with respect to the manual approach.
+To achieve more accurate density/abundance estimates with this pipeline, this study finds that the number
+of missed detections across all distances must be reduced.
+It is concluded that this study demonstrates proof-of-concept that MDE integrated camera trap distance
+sampling can be used, in this context, to achieve estimates of density and abundance that approach
+the accuracy of conventional means.

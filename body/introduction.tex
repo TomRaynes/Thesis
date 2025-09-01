@@ -1,35 +1,36 @@
 \section{Introduction}
 
 Around the world, ecosystems are experiencing alarming declines in biodiversity.
-Conservation efforts have shown encouraging results in some cases, though preservation measures
-are constrained by available resources.
+Conservation efforts have shown encouraging results in some cases,\cite{bd_1,bd_2,bd_3}
+though preservation measures
+are constrained by available resources.\cite{conservation_funding}
 Appropriate action must be informed by accurate data (e.g., population size and density), stressing
-the urgent need for larger scale biomonitoring capabilities.
+the urgent need for larger scale biomonitoring capabilities.\cite{conservation_data}
 
 Through the $\mathrm{21}^{\mathrm{st}}$ century, the usage of camera traps for biomonitoring has
-increased exponentially.
+increased exponentially.\cite{ct_usage}
 These are autonomous cameras, typically motion triggered, that are deployed in natural habitats to
 capture footage of wildlife.
-Camera traps have proven invaluable for conservation efforts, providing the infrastructure for
-cheap, large-scale data collection from which practitioners can form conclusions about population
-health and allocate resources appropriately in order to maximise results.
+Camera traps have proven invaluable for conservation efforts,\cite{ct_success} providing the
+infrastructure for cheap, large-scale data collection from which practitioners can form conclusions about population
+health and allocate resources appropriately in order to maximise results.\cite{ct_usage}
 
 Knowledge of population density and size (abundance) of animal populations is extremely important.
 For species where individuals are identifiable by unique markings, capture/recapture style methods
-can be applied in the analysis of camera trap video to derive estimates; however, this is not so
-straightforward for unmarked species.
-In these cases, estimates necessitate animal-to-camera distance data.
+can be applied in the analysis of camera trap video to derive estimates;\cite{capture_recapture}
+however, this is not so straightforward for unmarked species.
+In these cases, estimates necessitate animal-to-camera distance data.\cite{ctds}
 Generally, camera traps are monocular, meaning they use a single lens to capture imagery and, therefore,
-do not (directly) capture depth information.
+do not (directly) convey depth information.
 This highlights a significant problem.
 To obtain estimates of population density and abundance, animal-to-camera distances must be estimated.
 Here, the conventional approach involves a slow, manual process by which analysts compare animal
 observations in camera trap video to reference material that depicts objects at the respective camera
-location where their distance to the camera is known.
+location where their distance to the camera is known.\cite{HAUCKE2022101536}
 
 It follows that this constitutes a major bottleneck in conservation practices, where obtaining
-estimates for population density and abundance is only achievable though an inefficient and
-resource-intensive process.
+estimates for population density and abundance is only achievable though an inefficient, subjective
+and resource-intensive process.
 An alternative method, where manual distance estimation is avoided, would allow for a better use
 of resources in conservation efforts, allowing for broader biomonitoring capabilities across
 ecosystems.
@@ -37,7 +38,7 @@ ecosystems.
 Herein, an automated distance estimation pipeline is applied to a real-world camera trap
 dataset capturing chimpanzees in the West African rainforest.
 The distance estimates obtained are then used to estimate the local chimpanzee population
-density and abundance, establishing a full pipeline for the estimation of density and
+density and abundance, establishing a full pipeline for the estimation of population density and
 abundance from raw camera trap video.
 
 This application of monocular depth estimation (MDE) for the estimation of population density

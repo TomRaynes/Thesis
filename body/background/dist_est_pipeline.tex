@@ -6,8 +6,8 @@ sampled from camera trap video in the WCF dataset.
 Four distinct parameterisations of this pipeline are used (Figure~\ref{fig:distance_pipeline}) to
 generate four sets of distance data, combining either Dense Prediction Transformers\cite{dpt} (DPT)
 or Depth Anything\cite{depth_anything} models for MDE with either Mega Detector\cite{mega_detector}
-or both Mega Detector and Segment Anything\cite{segment_anything} used for collectively detection and
-pixel sampling.
+or both Mega Detector and Segment Anything\cite{segment_anything} used collectively for detection and
+pixel sampling to derive a final distance estimate.
 
 \vspace{5mm}
 
@@ -18,7 +18,7 @@ pixel sampling.
     \caption{Flowchart illustrating the overall workflow of the distance estimation pipeline.
     The MDE model generates depth maps corresponding to the detection frames. In the case of
     DPT, the outputted depth maps are each calibrated by aligning the depth scale to the
-    average depth of the calibration frames to give corresponding metric depth maps.
+    average depth sacle of the calibration frames to give corresponding metric depth maps.
     Mega detector then identifies bounding boxes within the detection frames with Segment
     Anything then optionally generating detection segmentations within these bounding boxes.
     The depth estimates of the pixels defined by the bounding boxes/segmentations given by
