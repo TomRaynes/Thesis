@@ -20,7 +20,10 @@ manually estimated distances.
         distance estimation pipeline with both the manual sample (Supplemented) and automated
         sample (Model Only). The error bars show the standard error corresponding to
         each configuration. The density and abundance estimates given by the manually estimated
-        distances are shown with the red dashed lines and the errors by the grey dashed lines.}
+        distances are shown with the red dashed lines and the errors by the grey dashed lines.
+        It is seen that DPT out-performs Depth Anything in accuracy of estimates; although,
+        all configurations lead to underpredicted density and abundance, especially in the case
+        of the model only data.}
     \label{fig:activity_chart}
 \end{figure}
 
@@ -46,6 +49,8 @@ When distances are overestimated, the detection function becomes elongated such 
 probability decays at a slower rate with respect to distance owing to the elongated function accounting
 for an increased probability of detection at far distances (Figure~\ref{fig:detection_function}).
 
+\vspace{-5mm}
+
 \begin{figure}[H]
     \centering
     \vspace{-2mm}
@@ -53,7 +58,8 @@ for an increased probability of detection at far distances (Figure~\ref{fig:dete
     \caption{Graph showing how the distribution of distance estimates affects the fitting of a
     detection function. The blue line represents a detection function fitted with distances
     of lower values while the red line represents one fitted with larger values, resulting in
-    the area under these curves being different in size.}
+    the area under these curves being different in size. Specifically, the area under the curve
+    corresponding to longer detection distances is greater.}
     \label{fig:detection_function}
 \end{figure}
 

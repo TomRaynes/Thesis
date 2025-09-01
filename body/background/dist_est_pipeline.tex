@@ -15,7 +15,8 @@ pixel sampling to derive a final distance estimate.
     \centering
     \includegraphics[width=0.9\textwidth]{body/background/assets/distance_pipeline}
     \vspace{3mm}
-    \caption{Flowchart illustrating the overall workflow of the distance estimation pipeline.
+    \caption{Flowchart illustrating the overall workflow of the distance estimation pipeline
+        (Haucke et al.\cite{HAUCKE2022101536}).
     The MDE model generates depth maps corresponding to the detection frames. In the case of
     DPT, the outputted depth maps are each calibrated by aligning the depth scale to the
     average depth sacle of the calibration frames to give corresponding metric depth maps.
@@ -34,7 +35,7 @@ DPT, introduced by Ranftl et al.\cite{dpt}, is a (novel at conception) deep lear
 for dense prediction tasks, adapting the conventional convolutional encoder/decoder architecture
 used for dense prediction\cite{segmentation_CNN,invariant_CNNs}
 (i.e., the labelling of all pixels in an image), by substituting the encoder with a series of staged
-vision transformers\cite{vision_transformer,transformer}.
+vision transfor-mers.\cite{vision_transformer,transformer}
 This proves to be beneficial for tasks involving dense prediction (i.e., MDE) as the network retains
 global context of the image and high feature resolution through all transformer stages\cite{dpt,transformer}.
 This is not the case with convolutional neural networks, where features at progressively higher levels of

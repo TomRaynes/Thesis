@@ -75,7 +75,8 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
         DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The blue dotted line
         shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
         the error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
-        units of meters.}
+        units of meters. It is seen that there is a reasonable correlation between manual and modelled
+        distance, although the level of correlation varies between configurations.}
     \label{fig:distance_comparison}
 \end{figure}
 
@@ -85,7 +86,10 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     \centering
     \caption{Gradients of the regression lines (blue dotted lines in Figure~\ref{fig:distance_comparison})
         correlating the averages of all binned distance estimates with their corresponding manual distance
-        estimate for each configuration.}
+        estimate for each configuration. These give a measure of how well the models capture the scale
+        of depth of the images (benchmarked to the manual estimates), where a gradient of one captures
+        perfect scale. Evidently, all values are lower than this, showing that the models do not capture
+        the full scale of depth in the scene.}
     \label{tab:regression_gradients}
     \begin{tabular}{cc}
         \textbf{Method} & \textbf{Regression Gradient}\\
@@ -103,7 +107,11 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     \caption{Graphs showing all modelled distance estimates mapped to thier corresponding manual
         estimates for the configurations: DPT/bounding box (top-left), DPT/segmentation (top-right),
         DA/bounding box (bottom-left) and DA/segmentation (bottom-right). The red dashed line shows
-        the ideal (i.e., model=manual). All distances are in units of meters.}
+        the ideal (i.e., model=manual). All distances are in units of meters. These graphs show the
+        spread of distance estimates at each distance. By inspection, it can be seen that error in
+        DPT estimates are generally spread mostly evenly above and below the ideal while Depth
+        Anything estimates tends to be below the ideal. This aligns with the results seen in
+        Table~\ref{tab:overall_errors}.}
     \label{fig:spread_comparison}
 \end{figure}
 
@@ -114,14 +122,16 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
     \centering
     \includegraphics[width=1.01\textwidth]{body/analysis/assets/errors/MAE}
     \caption{Mean average error for distance estimates grouped by their corresponding manual
-    estimates for each pipeline configuration.}
+    estimates for each pipeline configuration. Generally, it is seen that MAE is high at the
+    extremes of the distance scale with a spike at approximately seven meters.}
     \label{fig:mae}
 
     \vspace{2cm}
 
     \includegraphics[width=1.01\textwidth]{body/analysis/assets/errors/RMSE}
     \caption{Root mean squared error for distance estimates grouped by their corresponding manual
-    estimates for each pipeline configuration.}
+    estimates for each pipeline configuration. Generally, it is seen that RMSE is high at the
+    extremes of the distance scale with a spike at approximately seven meters.}
     \label{fig:rmse}
 \end{figure}
 
@@ -157,7 +167,9 @@ method results in an effectively failed calibration while the segmentation metho
     \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 0.5 meters (manual estimate).
         In this example, the bounding box method gives a distance estimate of 15.0 meters
-        while the segmentation method gives a distance estimate of 1.0 meters}
+        while the segmentation method gives a distance estimate of 1.0 meters. Here, the
+        bounding box detection method fails to calibrate to the scale of the
+        reference frames.}
     \label{fig:bbox_vs_seg_close_dpt}
 \end{figure}
 
@@ -194,9 +206,12 @@ distance estimates being very close.
     \caption{Example of Depth Anything depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 0.5 meters (manual estimate).
         In this example, the bounding box method gives a distance estimate of 4.11 meters
-        while the segmentation method gives a distance estimate of 4.17 meters.}
+        while the segmentation method gives a distance estimate of 4.17 meters. The distance
+        estimates are close due to identical depth maps, unlike DPT where calibration is appied.}
     \label{fig:bbox_vs_seg_close_da}
 \end{figure}
+
+\vspace{-5mm}
 
 Upon inspection of Table~\ref{tab:regression_gradients}, it can be seen that for both DPT and Depth
 Anything models, the gradients of the regression lines (correlating the averages of the binned
@@ -213,19 +228,20 @@ that correspond to a significantly shorter distance.
 Conversely, a high quality segmentation often avoids this.
 This effect is exemplified in Figure~\ref{fig:bbox_vs_seg_occluded}.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
     \centering
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_bbox}
+        \includegraphics[width=0.85\textwidth]{body/analysis/assets/depth_maps/occluded_bbox}
     }\\[1mm]
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/occluded_seg}
+        \includegraphics[width=0.85\textwidth]{body/analysis/assets/depth_maps/occluded_seg}
     }
     \caption{Example of DPT depth maps generated using bounding box (top) and segmentation
         (bottom) detection methods at a detection distance of 6.5 meters (manual estimate)
         where the detected individual is partially occluded by foliage. Here, the bounding
         box method gave a distance estimate of 4.40 meters while the segmentation method
-        gave a distance estimate of 6.96 meters.}
+        gave a distance estimate of 6.96 meters. Here, the bounding box method results in
+        underestimation as a result of occulding pixels in the bounding box.}
     \label{fig:bbox_vs_seg_occluded}
 \end{figure}
 
@@ -288,21 +304,23 @@ configurations with a common detection frame are shown side-by-side.
 \begin{figure}[H]
     \centering
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_dpt}
+        \includegraphics[width=0.88\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_dpt}
     }\\[1mm]
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.9\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_dpt}
+        \includegraphics[width=0.88\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_dpt}
     }\\[1mm]
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_da}
+        \includegraphics[width=0.67\textwidth]{body/analysis/assets/depth_maps/fine_detail/bbox_da}
     }\\[1mm]
     \makebox[0.8\textwidth][c]{
-        \includegraphics[width=0.7\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_da}
+        \includegraphics[width=0.67\textwidth]{body/analysis/assets/depth_maps/fine_detail/seg_da}
     }
     \caption{Example of depth maps generated using DPT/BBOX (row one), DPT/SEG
         (row two), DA/BBOX (row three) and DA/SEG (row four) detection methods at a detection
         distance of 13.5 meters (manual estimate). The following distance estimates were given:
-        DPT/BBOX = 10.0 meters, DPT/SEG = 10.4 meters, DA/BBOX = 7.83 meters, DA/SEG = 13.6 meters.}
+        DPT/BBOX = 10.0 meters, DPT/SEG = 10.4 meters, DA/BBOX = 7.83 meters, DA/SEG = 13.6 meters.
+        The depth maps show that Depth Anything is capturing the depth contours of fine structures
+        better than DPT.}
     \label{fig:fine_detail}
 \end{figure}
 
@@ -327,19 +345,29 @@ factor in these cases, where there is high contrast surrounding the desired pixe
 is negating the influence of these surrounding pixels.
 
 \vspace{5mm}
-\textbf{Summary}
+\textbf{Error Spike}
 
-Errors table
+Observing the error graphs in Figures~\ref{fig:mae} and~\ref{fig:rmse}, it can be seen that all
+configuration result in a significant spike in both mean average and root mean squared error at
+approximately seven meters.
+Of course, it is understandable that error in estimates will increase with distance.
+Cameras have a finite resolution and distant (and occluded) objects will correspond to fewer
+detected pixels in the image, meaning less information is captured.
+This is analogous to human depth perception, i.e., more distant objects are more difficult to
+distinguish.
 
-All configurations over-predict
-
-Sweet spot 2–7 meters
-
-Error spike at 7.5 meters
-
-Blurry detections frames
-
-djou09
+What is not immediately explainable though is why this error appears do decline again (i.e., why
+does the error not remain high?).
+Camera trap are generally deployed in such a manner leave an area clear of foliage in front of the
+camera so that animals can actually be observed.
+Detection outside of this clear area will, by definition, be occluded to some degree, with more
+distant detections being more occluded.
+A hypothesis here is that the increase in error at the spike is resulting from the increasing
+occlusion with distance.
+This additionally makes detection more difficult, meaning that at a certain distance, the only animals
+detected will be ones that are clearly visible and therefore more likely to result in an accurate
+distance estimate.
+This would explain the spike; however, whether this is actually the case remains uncertain.
 
 \clearpage
 
@@ -374,14 +402,15 @@ estimates.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1\textwidth]{body/analysis/assets/distance_graphs/reduced_cal}
+    \includegraphics[width=0.9\textwidth]{body/analysis/assets/distance_graphs/reduced_cal}
     \caption{Graphs showing mean DPT distance estimates (top) and all modelled distance
         estimates (bottom) mapped to thier corresponding manual
         estimates for bounding box (left) and segmentation (right) detection methods using only the
         closest and furthest calibration frames as references. The blue dotted line
         shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
         the error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
-        units of meters.}
+        units of meters. It can be seen that the spead of these estimates is greater than seen with
+        the normally calibrated DPT. Estimates are also biased towards underprediction.}
     \label{fig:reduced_calibration}
 \end{figure}
 
@@ -416,12 +445,13 @@ This effect is visualised in Figure~\ref{fig:disparity_calibration}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{body/analysis/assets/calibration_effects/disparity_calibration}
+    \includegraphics[width=0.65\textwidth]{body/analysis/assets/calibration_effects/disparity_calibration}
     \caption{Simple visualisation showing how the number of reference frames can influence the fitting
         of a calibration function. The grey solid line represents the true mapping of the uncalibrated DPT
         outputted disparity to the calibrated disparity (i.e, 1 / distance). The blue dashed line represents
         a linear disparity mapping fitted using a series of (i.e., fifteen) reference frames while the red
-        dashed line represents one fitted using only two (i.e., closest and furthest) reference frames}
+        dashed line represents one fitted using only two (i.e., closest and furthest) reference frames.
+        This shows how a lack of reference frames could bias the calibration.}
     \label{fig:disparity_calibration}
 \end{figure}
 
@@ -505,13 +535,15 @@ This is visualised in Figure~\ref{fig:disparity_scale}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{body/analysis/assets/calibration_effects/disparity_scale}
+    \includegraphics[width=0.6\textwidth]{body/analysis/assets/calibration_effects/disparity_scale}
     \caption{Simple visualisation showing how sufficient non-linearity in the raw disparity to calibrated
     disparity mapping can result in different scales of fitted calibration function approximations when
     different numbers of reference frames are used. The grey solid line represents the true mapping of raw
     to calibrated disparity (i.e, 1 / distance). The blue dashed
     line represents a linear disparity mapping fitted using many reference frames
-    while the red dashed line represents one fitted using only frames at one and fifteen meters.}
+    while the red dashed line represents one fitted using only frames at one and fifteen meters.
+    The intersection of the regression lines demonstrations the hypothesis of how short distances are
+    underestimated and far distances are overestimated.}
     \label{fig:disparity_scale}
 \end{figure}
 
@@ -531,10 +563,12 @@ of DPT with both bounding box and segmentation detection methods (Figure~\ref{fi
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{body/analysis/assets/calibration_effects/MAE_var_cal}
+    \includegraphics[width=0.65\textwidth]{body/analysis/assets/calibration_effects/MAE_var_cal}
     \caption{Graph showing the mean average error (MAE) of all distance estimates associated with
         a single camera location with respect to their corresponding manual distance estimates
-        using DPT calibrated with a varying number of refrence frames.}
+        using DPT calibrated with a varying number of refrence frames.
+        It is seen that, after approximetely ten reference frame, minimal change in
+        error is occurring.}
     \label{fig:MAE_var_cal}
 \end{figure}
 
@@ -558,7 +592,9 @@ camera location depth maps are shown for each of the runs below (Figure~\ref{fig
     \includegraphics[width=1\textwidth]{body/analysis/assets/calibration_effects/variable_calibation}
     \caption{DPT depth maps of a single camera location generatated using a variable number of
         calibration frames, each labelled with the corresponding number of frames (also the landmark
-        distance of the furthest frame) in the bottom-right corner}
+        distance of the furthest frame) in the bottom-right corner. In general, it is seen that
+        with each susbsequent calibration, where an additional reference is added (i.e., at one meter
+        further than the previous), the depth of more distant features can be captured.}
     \label{fig:variable_calibration}
 \end{figure}
 
