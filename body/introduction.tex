@@ -39,7 +39,23 @@ Herein, an automated distance estimation pipeline is applied to a real-world cam
 dataset capturing chimpanzees in the West African rainforest.
 The distance estimates obtained are then used to estimate the local chimpanzee population
 density and abundance, establishing a full pipeline for the estimation of population density and
-abundance from raw camera trap video.
+abundance from raw camera trap video (Figure~\ref{fig:abstract_workflow}).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\textwidth]{body/abstracted_pipeline}
+    \caption{Abstracted workflow showing the entire pipeline proposed in this study. Firstly,
+    specific frames of the camera trap video are sampled/extracted. These are then passed to the
+    monocular depth estimation sub-pipeline to generate distance estimate for all animals that
+    are detected in the extracted frames (note that pre-prepared calibration frames are sometimes
+    required for this stage, Section~\ref{subsec:dist_est}). Obtained distance estimates are then
+    joined to their corresponding camera trap metadata (this includes spacial and temporal data).
+    Finally, this joined data is then passed to a script which produces estimates for population
+    density and abundance. This overall pipeline greatly streamlines the process of camera trap
+    distance sampling, necessitating a time frame on the order of hours (depending on volume of
+    data) while requiring almost no manual oversight.}
+    \label{fig:abstract_workflow}
+\end{figure}
 
 This application of monocular depth estimation (MDE) for the estimation of population density
 is a virtually unexplored area of research.
