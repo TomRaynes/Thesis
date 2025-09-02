@@ -10,8 +10,8 @@ Taï National Park is a protected World Heritage conservation site of great impo
 in Ivory Coast, West Africa.\cite{whs}
 It is one of only few significant rainforested areas remaining in the region, covering an area
 of roughly 4500 $\mathrm{km}^\mathrm{2}$.\cite{tnp_deforestation}
-It has a rich biodiversity;\cite{biodiversity} however, populations face persistent threat from
-predominantly human-induced factors.\cite{wcf_conservation,anti_poaching}, highlighting the urgency for
+It has a rich biodiversity;\cite{biodiversity} however, populations face persistent threats from
+predominantly human-induced factors,\cite{wcf_conservation,anti_poaching} highlighting the urgency for
 improved and novel methods of biomonitoring.
 
 \subsubsection{Dataset}\label{subsubsec:dataset}
@@ -25,12 +25,12 @@ The camera traps were set up to span a wide area of the park, with clustering in
 
 For each camera trap location, reference videos are supplied that give depth context information
 for the camera location.
-These videos follow all adopt a consistent referencing method.
+These videos all adopt a consistent referencing method.
 Here, a tape measure is placed along the ground in a straight line, beginning at the transect
 origin (camera trap) and spanning a distance of fifteen meters.
 The reference video is then recorded where a member of the survey team then positions themselves
-at one meter distance intervals, facing the camera, along this measured line.
-At each distance interval, the team member holds a paper sheet labelled with the corresponding
+at one-meter distance intervals, facing the camera, along this measured line.
+At each distance interval, the surveyor holds a paper sheet labelled with the corresponding
 distance to the camera.
 
 \vspace{5mm}
@@ -40,15 +40,15 @@ Also supplied with the dataset is a large CSV file that holds the annotated data
 the camera trap video.
 Each row corresponds to a single chimpanzee detection.
 For any individual chimpanzee, a row of detection data is annotated at every two second interval
-that that is individual is seen in the video.
+that an individual is seen in the video.
 The first detection corresponds to the moment at which at least half of the chimpanzee's
 two-dimensional projected area with respect the camera angle is captured in the camera trap
 video frame.
-detection data is then record for duration of capture in the frame, with the final detection
+Detection data is then recorded for the duration of capture in the frame, with the final detection
 following this same principle.
 
 The column structure of the CSV file corresponds to detection metadata used for activity estimation
-(i.e., data/time, video/region identifiers, region area, effort) as well as manually estimated
+(i.e., data/ time, video/region identifiers, region area, effort) as well as manually estimated
 distances for each chimpanzee detection.
 Distances are estimated by analysts that use the associated reference material of the camera
 trap locations to derive informed approximations.

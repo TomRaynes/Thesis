@@ -48,11 +48,11 @@ in a loss of detail at deeper layers where the context is larger\cite{dpt,invari
 The vision transformer backbone of the network is pretrained with weights obtained using the ImageNet
 dataset while the convolutional decoder weights are randomised\cite{dpt,imagenet}.
 For the application to MDE in this pipeline, the model is trained on a large aggregate
-dataset of approximately 1.4 million images, leveraging a technique referred to as 'zero-shot
+dataset of approximately 1.4 million images, leveraging a technique referred to as `zero-shot
 cross dataset transfer'.
 This technique employs loss functions that are compatible with training data obtained using a range
 ground-truth assessment methods (e.g., stereo cameras, lasers, structured-light 3D scanners) with
-differing scales and shits.
+differing scales and shifts.
 As a consequence, raw DPT output should be considered as a measure of relative distance\cite{dpt,dpt_training}.
 
 \vspace{5mm}
@@ -83,8 +83,8 @@ remaining pixels being coloured black.\cite{HAUCKE2022101536}
         \includegraphics[height=0.16\textheight]{body/background/assets/calibration/mask}
     \end{subfigure}
 
-    \caption{Example a DPT calibration frame (left) and corresponding binary mask (right) at 2 meters.
-        the binary mask shows a pixel-wise segmentation of the frame landmark, where occluding tree
+    \caption{Example of a DPT calibration frame (left) and corresponding binary mask (right) at 2 meters.
+        The binary mask shows a pixel-wise segmentation of the frame landmark, where occluding tree
         branch is excluded from the segmentation.}
     \label{fig:dpt_cal_frames}
 \end{figure}
@@ -144,7 +144,7 @@ for the detection frame are now given by
 respectively.
 
 For each of the three previously stated minimisation formulae used to derive the most appropriately
-fitting values for scale and shift as to minimal overall disparity error, the RANSAC fitting method
+fitting values for scale and shift to minimise overall disparity error, the RANSAC fitting method
 is used\cite{HAUCKE2022101536,ransac}.
 
 \subsubsection{Depth Anything}
@@ -153,8 +153,8 @@ Depth Anything is a deep learning model for monocular depth estimation that give
 metric distance estimates.
 Conceptually, it builds on the DPT framework where a convolutional encoder is substituted for a
 backbone of pre-trained staged vision transformers\cite{dpt,depth_anything}.
-In development, the objective of the researchers was to "build a foundation model for
-MDE"\cite{depth_anything}, whereby accurate depth estimates are given even in circumstances
+In development, the objective of the researchers was to ``build a foundation model for
+MDE,''\cite{depth_anything} whereby accurate depth estimates are given even in circumstances
 where the model is applied to unseen datasets, i.e., achieving zero-shot performance\cite{zero_shot}.
 
 The model uses a DINOv2 encoder initialised with pre-trained weights\cite{dino_v2}; however,
@@ -162,65 +162,66 @@ the novelty of Depth Anything lies in how it is trained.
 The training methodology leverages an enormous quantity of unlabelled monocular images that are
 automatically labelled with corresponding pixel-wise pseudo-distance estimates.
 To achieve this, the researchers conceive two MDE models, both of identical pre-trained architecture
-(described above), referred to as 'teacher' and 'student' models.
+(described above), referred to as `teacher' and `student' models.
 Firstly, the teacher model is trained on approximately 1.5 million pre-labelled monocular images
 and corresponding ground-truth targets collected from a variety of datasets.
 A data-engine is created to collect approximately 62 million unlabelled images from many datasets,
 which are then processed by the teacher model to automatically assign corresponding target depth labels,
 giving an extremely large dataset of pseudo-labelled images.
 This is then used as training data for the student model.
-Finally, the model is fine-tuned with metric datasets\cite{nyu_v2,kitti}, giving the final model that
-is used in this distance sampling study\cite{depth_anything}.
+Finally, the model is fine-tuned with metric datasets,\cite{nyu_v2,kitti} giving the final model that
+is used in this distance sampling study.\cite{depth_anything}
 
 Of important note, for training of the student model, the training data images were artificially
-deformed as to introduce perturbations\cite{depth_anything} such as colour distortion and spacial
+deformed, introducing perturbations\cite{depth_anything} such as colour distortion and spacial
 distortion using CutMix\cite{cutmix}.
-This necessitates the model to be responsive to more complex cues (e.g., geometry, high-level semantics)
-in order to predict distances aligned with the predictions of the unperturbed teacher model.\cite{depth_anything}
-The overall effect of this is that model is more robust and generalised, showing strong performance in
-zero-shot distance estimation\cite{depth_anything,mde_models_comparison}
+This necessitates that the model be responsive to more complex cues (e.g., geometry, high-level semantics)
+in order to predict distances aligned with the predictions of the teacher model, trained on unperturbed
+data.\cite{depth_anything}
+The overall effect of this is that the model is more robust and generalised, showing strong performance in
+zero-shot distance estimation.\cite{depth_anything,mde_models_comparison}
 
 \subsubsection{Mega Detector}
 
-Mega Detector is a deep learning animal (including humans) detection model.
+Mega Detector is a deep learning animal (including human) detection model.
 It is designed to process images obtained from camera trap video and generate bounding boxes
 enclosing all instances of detected animals (note: some additional objects are also detected),
 thereby minimising the labour-requirements of manual annotation.
 The model additionally assigns high-level classifications the these detections (i.e., animal,
-human, vehicle)\cite{mega_detector}.
-Architecturally, the detection component is based on Faster R-CNN\cite{megadetector_article,faster_r},
-a fully convolutional network that leverages a method referred to as 'DeepMultiBox' which
-generates 'region proposals' for potential bounding boxes in the image.\cite{multibox}
+human, vehicle).\cite{mega_detector}
+Architecturally, the detection component is based on Faster R-CNN,\cite{megadetector_article,faster_r}
+a fully convolutional network that leverages a method referred to as `DeepMultiBox' which
+generates `region proposals' for potential bounding boxes in the image.\cite{multibox}
 These are then refined over convolutional layers, where the final fully-connected layer predicts
-any number of bounding boxes in the processed image\cite{faster_r}.
+any number of bounding boxes in the processed image.\cite{faster_r}
 These bounding boxes constitute the detection mechanism of the pipeline used in this project.
 
 Mega detector is trained on millions of images using an aggregate dataset containing
 a large pool of wildlife camera trap video, capturing a diverse range of species.\cite{megadetector_article}
 As a consequence, the model shows outstanding generalisation, excelling in zero-shot
-detection\cite{md_application1,md_application2}.
+detection.\cite{md_application1,md_application2}
 Additionally, the model assigns detection confidence levels to bounding boxes which are often
-used as thresholds to filter false positive detections\cite{bird_classification}.
+used as thresholds to filter false positive detections.\cite{bird_classification}
 
 \subsubsection{Segment Anything}
 
 Segment Anything is a promptable general-purpose deep learning model for generating
 pixel-level segmentations of image components\cite{segment_anything}.
 Images are encoded using a MAE\cite{mae} pre-trained vision transformer encoder which is modified
-to handle high resolution images\cite{ViT_detection}.
-For prompting, a variety of forms are accepted\cite{segment_anything}, namely text, points,
+to handle high resolution images.\cite{ViT_detection}
+For prompting, a variety of forms are accepted,\cite{segment_anything} namely text, points,
 segmentations and, in particular, bounding boxes, which are used as inputs for Segment Anything
 in the context of this project.
 Bounding boxes are encoded as two separate embeddings, corresponding to the top-left and bottom-right
 corners of the box.
 Each of these embeddings is a summation of the positional encoding\cite{positional_encoding} of the
 location of the corner point with the learned embedding representing the specific corner
-(i.e., top-left or bottom-right)\cite{segment_anything}.
-The decoder, based on a modified transformer decoder\cite{transformer}, then updates the image and prompt embeddings
+(i.e., top-left or bottom-right).\cite{segment_anything}
+The decoder, based on a modified transformer decoder,\cite{transformer} then updates the image and prompt embeddings
 via self and cross attention over two blocks, mapping them to segmentation embeddings.
 These then undergo further attention to an upscaled representation of the image embedding,
 passing the output to a MLP\cite{mlp} which outputs a vector matching the dimensions of the upscaled image embedding.
-This vector and image embedding are then used to predict a segmentation\cite{segment_anything}.
+This vector and image embedding are then used to predict a segmentation.\cite{segment_anything}
 
 Segment Anything is trained on an extremely large dataset, using a custom-built data-engine to collect
 over a billion individual segmentations corresponding to eleven million images.

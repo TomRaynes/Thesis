@@ -2,9 +2,9 @@
 
 Distance sampling is a statistical framework by which the local population density and abundance
 of a species is estimated.
-Two primary methods, 'line' and 'point' transect distance sampling,\cite{distance_sampling_applications}
+Two primary methods, `line' and `point' transect distance sampling,\cite{distance_sampling_applications}
 exist for this; however, the methodology explored in this project leverages the latter approach,
-where each camera trap is treated as a single point transect
+where each camera trap is treated as a single point transect.
 
 Here, it is assumed that the true distribution of individuals in the population is evenly distributed
 over the survey area.\cite{distance_samping}
@@ -20,7 +20,7 @@ with respect to distance must be modelled to account for undetected animals.
 \subsubsection{Density and Abundance Derivation}
 
 The following summarises the key steps for deriving density and abundance estimates according
-to the comprehensive distance sampling methodology introduced in 'Distance Sampling: Estimating Abundance
+to the comprehensive distance sampling methodology introduced in `Distance Sampling: Estimating Abundance
 of Biological Populations' (Buckland et al., 1993).\cite{distance_samping}
 
 \vspace{5mm}
@@ -31,7 +31,7 @@ at radial distance $r$ from the origin.
 The observed distances are grouped into distance interval bins that cover the range of observed distances
 (e.g., 0–1 m, 1–2 m, \ldots) up to the furthest considered distance, $w$, known as the truncation distance.
 To estimate density, a detection function is fitted to model the observed distribution of detection
-distances at the transect (Figure~\ref{fig:function_fitting}.
+distances at the transect (Figure~\ref{fig:function_fitting}).
 
 \vspace{5mm}
 
@@ -50,7 +50,7 @@ distances at the transect (Figure~\ref{fig:function_fitting}.
 
 \vspace{3mm}
 
-The 'wellness of fit' of several detection function candidates is assessed.
+The `wellness of fit' of several detection function candidates is assessed.
 A variety of candidates can be used; however, common candidates include the half-normal and
 hazard-rate distributions, given by
 \[
@@ -71,7 +71,7 @@ given by
 \]
 where $w$ is the truncation distance.
 The probability density function is a measure of the distribution of observed detections, i.e.,
-given an animal is detected between zero and $w$ meters, the probability of the detection distance
+given an animal is detected between zero and $w$ meters, $f(r)$ is the probability of the detection distance
 being at $r$ meters.
 
 \vspace{5mm}
@@ -98,11 +98,11 @@ This is given by
 \]
 where $L$ is the likelihood resulting from the given candidate function and $q$ is the number of
 parameters of the given candidate function.
-Here, $ln(L)$, is referred to as the 'log-likelihood' and gives a measure of the wellness of fit of
+Here, $ln(L)$, is referred to as the `log-likelihood' and gives a measure of the wellness of fit of
 the given candidate function.
 Conversely, $q$ is a measure of complexity of the given candidate function and contributes to a
-'penalty' term in the equation.
-A such, the final detection function, $g(r)$, is determined to be the candidate function that gives
+`penalty' term in the equation.
+As such, the final detection function, $g(r)$, is determined to be the candidate function that gives
 the lowest AIC value.
 
 %\vspace{5mm}
@@ -138,7 +138,7 @@ to estimates derived from camera trap video.
 
 Firstly, like all conventional cameras, camera traps capture a specific field of view (FOV).
 This is used to scale the effective area, $A_e$, of the point transect.
-In this case, cameras with a FOV of 38\textdegree are used, so this is scaled to a fraction
+In this case, cameras with a FOV of 38\textdegree~~are used, so this is scaled to a fraction
 of 38/360.
 Additionally, as camera traps operate 24 hours per day, the script uses detection timestamps
 with temporal operation metadata to model the daily behaviour of the population to derive an
@@ -152,7 +152,7 @@ time.\cite{ct_distance_sampling_1,ct_distance_sampling_2}
 \textbf{Bootstrap Calculations}
 
 The script also performs a number of bootstrapping operations to the data.
-This involves resampling the data many times (50 times in this case) and re calculating the
+This involves resampling the data many times (50 times in this case) and recalculating the
 density and abundance estimates each time.
 This gives a distribution of many estimates from which standard error and variance can be assessed.
 Ultimately, this gives a more complete picture of the robustness and sensitivity of the density and

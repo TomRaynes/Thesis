@@ -28,8 +28,8 @@ corresponding raw calibration frame.
 
     \caption{Manual (left) and automated (right) calibration frame segmentation mask overlayed atop
     their corresponding raw calibration frame for three meters (top) and ten meters (bottom).
-    Generally good results are for both methods at close distance but deterioration segmentation quality
-    at far distance resulting in egde-leakage. Additionally, both automated methods excluding part of
+    Generally good results are seen for both methods at close distance but deterioration segmentation quality
+    at far distance resulting in edge-leakage. Additionally, both automated examples exclude part of
     the landmark (i.e., paper sheet) from the segmentation which becomes problematic during the calibration
     frame alignment process.}
     \label{fig:mask_overlays}
@@ -43,12 +43,12 @@ especially at longer distances.
 For longer-distance frames, the landmarks occupy
 fewer pixels and, most importantly, become broken up into many segments due to occlusion
 from the dense foliage found in this environment.
-These factors result in the loss many of the pixel-level cues that Segment Anything Model
+These factors result in the loss of many of the pixel-level cues that Segment Anything Model
 uses to derive a segmentation boundary, leading to calibration masks that display edge-leakage
 and the masking of pixels that are not themselves part of the landmark.
 
 Evident from Figure~\ref{fig:mask_overlays}, the
-automated segmentations exclude all pixels corresponding the non-human components of the
+automated segmentations exclude all pixels corresponding to the non-human components of the
 landmarks (i.e., that distance labeled sheets of paper).
 This is undesirable for the calibration process since the depth scaling of the calibration
 frames should be aligned based on only the location environment features (i.e., the pixels
@@ -60,7 +60,7 @@ fifteen meters), yielded no segmentations at all.
 This is due to a failure to localise the landmarks in these frames by YOLOv5 detector.
 This is an unsurprising result given the nature of the environment at Taï National Park.
 At these distances, landmark occlusion leads to extremely subtle pixel-level detection cues
-and therefore great difficulty of identification even for a human.
+and therefore great difficulty with identification, even for a human.
 An example of this failure case is shown in Figure~\ref{fig:15m_frame}.
 
 \vspace{5mm}
@@ -76,9 +76,9 @@ An example of this failure case is shown in Figure~\ref{fig:15m_frame}.
         \includegraphics[width=\linewidth]{body/analysis/assets/frame_masks/15m_mask}
     \end{minipage}
 
-    \caption{Example of a calibration frame (left) where landmark localisation wit YOLO of the automated
+    \caption{Example of a calibration frame (left) where landmark localisation with YOLO of the automated
     masking method failed. The corresponding manual binary mark is shown on the right. Here, the detector
-    is working with a significant handicap campare to a human annotator, who has the additional context
+    is working with a significant handicap campared to a human annotator, who has the additional context
     given in the reference video.}
     \label{fig:15m_frame}
 \end{figure}

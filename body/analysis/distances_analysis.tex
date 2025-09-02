@@ -13,7 +13,7 @@ Ideally, each and every manual distance should be joined to its corresponding mo
 distance estimate; however, due to the absence of any frame-position data associated
 with the manual annotations, automating this using traditional algorithms is impossible
 in circumstances where multiple chimps are captured in a single frame.
-This is because when multiple individuals are detected, there is ambiguity in regard to
+This is because when multiple individuals are detected, there is ambiguity with regard to
 which distance a given modelled distance should be joined to.
 Moreover, approaching this task manually is extremely labour-intensive and was therefore
 outside the scope of this project.
@@ -41,7 +41,7 @@ Table~\ref{tab:regression_gradients} shows the gradients of the fitted regressio
 correlating the averages of all grouped distance estimates with their corresponding manual
 distance estimate for each configuration.
 These individual errors for each of these groups were then calculated.
-Figure~\ref{fig:mae} show the change in mean average error for each group while
+Figure~\ref{fig:mae} shows the change in mean average error for each group while
 Figure~\ref{fig:rmse} shows the change in root mean squared error for each group.
 
 \vspace{1cm}
@@ -139,7 +139,7 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
 
 \textbf{Detection Method Effects}
 
-Contrasting the distance estimates of the two detection method using DPT distance estimation,
+Contrasting the distance estimates of the two detection methods using DPT distance estimation,
 an increase in both accuracy and precision is observed for the segmentation method compared
 to the bounding box method at close distances (i.e., < 2 meters).
 For modelled distances corresponding to manual estimates of 0.5 meters, the bounding box
@@ -283,8 +283,8 @@ are very close in value, implying that most estimates are over-predicted.
 
 As seen in Table~\ref{tab:regression_gradients}, the gradients of the regression lines
 correlating the averages of the binned DPT distance estimates with respect to their manual
-estimates are greater and also closer the ideal (gradient = 1) than that of Depth Anything.
-This shows that, overall, DPT is better capturing the true scale of depth in the detection
+estimates are greater and also closer to the ideal (gradient = 1) than that of Depth Anything.
+This shows that, overall, DPT is better at capturing the true scale of depth in the detection
 frames than Depth Anything.
 At short to medium distances (i.e., 2–7 meters), Figure~\ref{fig:distance_comparison} shows
 that distance estimate averages closely follow a linear relationship, indicating that within
@@ -337,18 +337,18 @@ much more detail in this region, therefore enabling the different pixel sampling
 in the detection distance calculation to yield different results.
 In the case of the bounding box method, the contribution of close-distance occluding pixels to the
 percentile calculation skews the distance estimate, resulting in a value of 7.83 meters.
-For the segmentation method, however, this is no such influence since detection distance is
+For the segmentation method, however, there is no such influence since detection distance is
 determined by the depth of centre-most point of the segmentation, resulting in a value of 13.6
 meters which is aligned closely to the manual estimate of 13.5 meters.
-Results such as these are achieved in spite of imperfect segmentation since the most important
+Results such as these are achieved in spite of imperfect segmentation, since the most important
 factor in these cases, where there is high contrast surrounding the desired pixel sampling region,
 is negating the influence of these surrounding pixels.
 
 \vspace{5mm}
 \textbf{Error Spike}
 
-Observing the error graphs in Figures~\ref{fig:mae} and~\ref{fig:rmse}, it can be seen that all
-configuration result in a significant spike in both mean average and root mean squared error at
+By observing the error graphs in Figures~\ref{fig:mae} and~\ref{fig:rmse}, it can be seen that all
+configurations result in a significant spike in both mean average and root mean squared error at
 approximately seven meters.
 Of course, it is understandable that error in estimates will increase with distance.
 Cameras have a finite resolution and distant (and occluded) objects will correspond to fewer
@@ -356,15 +356,15 @@ detected pixels in the image, meaning less information is captured.
 This is analogous to human depth perception, i.e., more distant objects are more difficult to
 distinguish.
 
-What is not immediately explainable though is why this error appears do decline again (i.e., why
-does the error not remain high?).
-Camera trap are generally deployed in such a manner leave an area clear of foliage in front of the
+What is not immediately explainable though is why this error appears to decline again (i.e., why
+it does not remain high).
+Camera traps are generally deployed in a manner such that an area is left clear of foliage in front of the
 camera so that animals can actually be observed.
 Detection outside of this clear area will, by definition, be occluded to some degree, with more
 distant detections being more occluded.
 A hypothesis here is that the increase in error at the spike is resulting from the increasing
 occlusion with distance.
-This additionally makes detection more difficult, meaning that at a certain distance, the only animals
+This, additionally, makes detection more difficult, meaning that at a certain distance, the only animals
 detected will be ones that are clearly visible and therefore more likely to result in an accurate
 distance estimate.
 This would explain the spike; however, whether this is actually the case remains uncertain.
@@ -387,7 +387,7 @@ estimates.
 \begin{table}[htbp]
     \centering
     \caption{Mean average error (MAE), root mean squared error (RMSE) and average difference between
-    model and manual estimate ($\Delta_{average}$) for the bounding box and segmentation detetion methods
+    model and manual estimates ($\Delta_{average}$) for the bounding box and segmentation detection methods
     using only the closest and furthest calibration frames as references.)}
     \label{tab:reduced_calibration_errors}
     \begin{tabular}{cccc}
@@ -404,13 +404,13 @@ estimates.
     \centering
     \includegraphics[width=0.9\textwidth]{body/analysis/assets/distance_graphs/reduced_cal}
     \caption{Graphs showing mean DPT distance estimates (top) and all modelled distance
-        estimates (bottom) mapped to thier corresponding manual
+        estimates (bottom) mapped to their corresponding manual
         estimates for bounding box (left) and segmentation (right) detection methods using only the
         closest and furthest calibration frames as references. The blue dotted line
         shows the fitted regression line. The red dashed line shows the ideal (i.e., model=manual).
-        the error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
-        units of meters. It can be seen that the spead of these estimates is greater than seen with
-        the normally calibrated DPT. Estimates are also biased towards underprediction.}
+        The error bars show the 25–75 (green) and 5–95 (purple) percentiles. All distances are in
+        units of meters. It can be seen that the spread of these estimates is greater than seen with
+        fully calibrated DPT. Estimates are also biased towards underprediction.}
     \label{fig:reduced_calibration}
 \end{figure}
 
@@ -423,7 +423,7 @@ all reference frames while the segmentation results give an overall MAE of 2.16 
 The spread of the distance estimates have also increased for frames corresponding to all manual
 distances.
 Moreover, the negative $\Delta_{average}$ values show that this calibration, on average, leads to
-underestimation of distances in this dataset
+underestimation of distances in this dataset.
 
 The increase in error of this calibration method is most likely a result of the calibration function
 being much more susceptible to any outliers in the DPT estimated depth of the reference frames in
@@ -449,7 +449,7 @@ This effect is visualised in Figure~\ref{fig:disparity_calibration}.
     \caption{Simple visualisation showing how the number of reference frames can influence the fitting
         of a calibration function. The grey solid line represents the true mapping of the uncalibrated DPT
         outputted disparity to the calibrated disparity (i.e, 1 / distance). The blue dashed line represents
-        a linear disparity mapping fitted using a series of (i.e., fifteen) reference frames while the red
+        a linear disparity mapping, fitted using a series of (i.e., fifteen) reference frames while the red
         dashed line represents one fitted using only two (i.e., closest and furthest) reference frames.
         This shows how a lack of reference frames could bias the calibration.}
     \label{fig:disparity_calibration}
@@ -464,9 +464,9 @@ references give the calibration functions
 \]
 respectively, where $D_{raw}$ is the raw uncalibrated disparity and $D_{cal}$ is the calibrated disparity
 equal to inverse distance.
-If a pixel has a raw disparity of $D_{raw}$ = 0.3, applying the 'all references' calibration gives a
+If a pixel has a raw disparity of $D_{raw}$ = 0.3, applying the `all references' calibration gives a
 calibrated disparity of $D_{cal}$ = 0.25, resulting in an estimated distance of 4 meters while applying
-the 'two references' calibration gives a calibrated disparity of $D_{cal}$ = 0.4, resulting in an
+the `two references' calibration gives a calibrated disparity of $D_{cal}$ = 0.4, resulting in an
 estimated distance of 2.5 meters.
 
 This hypothesis is supported when the DPT reference depth maps calibrated using both reference frame
@@ -540,7 +540,7 @@ This is visualised in Figure~\ref{fig:disparity_scale}.
     disparity mapping can result in different scales of fitted calibration function approximations when
     different numbers of reference frames are used. The grey solid line represents the true mapping of raw
     to calibrated disparity (i.e, 1 / distance). The blue dashed
-    line represents a linear disparity mapping fitted using many reference frames
+    line represents a linear disparity mapping, fitted using many reference frames
     while the red dashed line represents one fitted using only frames at one and fifteen meters.
     The intersection of the regression lines demonstrations the hypothesis of how short distances are
     underestimated and far distances are overestimated.}
@@ -609,7 +609,7 @@ of the associated distance estimates.
 It is not immediately clear why this occurs with just these two calibrations.
 Calibration three, despite not capturing the overall depth scale, does not show this effect and
 correlates well with the remaining calibration distance estimate errors and depth maps.
-A reason may be due to instability of the calibration function when few references are used
+The reason for this may be due to instability of the calibration function when few references are used
 resulting from a greater influence from errors in DPT output and calibration frame mask quality;
 however, this remains unclear.
 
@@ -619,8 +619,8 @@ in the depth maps.
 This is explained by understanding that the calibrated depth map of a given camera location is
 derived from the calibrated reference frame in which that landmark is at the furthest distance form
 the camera\cite{HAUCKE2022101536}.
-This gives a calibration map where the landmark occupies the smallest number of pixels so to maximise
+This gives a calibration map where the landmark occupies the smallest number of pixels so as to maximise
 the background context.
-When few references are used, however, the furthest landmark is close and occupies a prominent number
+When few references are used, however, the furthest landmark is closer and occupies a prominent number
 of pixels.
 

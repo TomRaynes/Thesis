@@ -39,7 +39,7 @@ duration of the camera trap video.
 Here, an object detector, e.g., YOLOv8,\cite{YOLOv8} may be used to generate bounding
 boxes while missed detections can be inferred and corresponding bounding boxes predicted
 using an object tracking algorithm, e.g., DeepSORT\@.\cite{deepsort}
-This approach has already shown impressive results the biomonitoring space.\cite{detection_pipeline}
+This approach has already shown impressive results in the biomonitoring space.\cite{detection_pipeline}
 These bounding boxes may then be sampled in correspondence to the
 extracted frames (i.e. frames used for MDE) and then processed with the depth data in an
 equivalent manner.
@@ -48,15 +48,15 @@ density and abundance estimates is yet to be seen.
 
 \subsubsection{Calibration Frame Preparation}
 
-Somewhat of a bottleneck in this methodology is the preparation of the DPT calibration
+Somewhat of a bottleneck in this methodology, is the preparation of the DPT calibration
 material (i.e., calibration frames and binary masks).
-The time requirement for preparing these is certainly a huge improvement over time saved
+The time requirement for preparing these is certainly a huge improvement over
 manually annotating detection distances, but is still significant, most especially for
 binary mask preparation which took approximately a week to complete.
 As discussed, the automated masking method in Section~\ref{subsubsec:mask_creation} yields
 inconsistent results, highlighting the need for refinement here.
 The custom-built calibration frame extractor software, as seen in Section~\ref{fig:frame_extractor},
-proved to be of great success however, allowing for all raw calibration frames to be extracted at a
+proved to be of great success, however, allowing for all raw calibration frames to be extracted at a
 significantly increased rate.
 
 \subsubsection{Density / Abundance Pre-Processing}
@@ -72,17 +72,17 @@ requirements of pre-processing are but a fraction of those required for distance
 
 \subsubsection{MDE Models}
 
-When applied to this dataset, DPT outperforms Depth Anything with regard absolute error of
+When applied to this dataset, DPT outperforms Depth Anything with regard to absolute error of
 distance estimates.
 Additionally, while both models over-predict distance to some degree, the skew is much more
-neutral in the case of DPT, in comparison to Depth Anything which significantly over-predicts.
+neutral in the case of DPT, in comparison to Depth Anything, which significantly over-predicts.
 As explained in Section~\ref{subsubsec:configuration_effects}, this leads to DPT being the
 better choice of distance estimation model for achieving density and abundance results that are
 most reflective of the ground-truth.
 At a high level, this makes sense given that DPT output is specifically calibrated
 to each individual camera location and is therefore a better description of the environment.
 Future studies may show interesting results if a similar reference frame style calibration
-were to be applied to the Depth Anything.
+were to be applied to Depth Anything.
 This has the potential to produce even better estimates of density and abundance than DPT,
 given Depth Anything's reasonable performance without calibration and its ability to better
 capture fine detail in depth contrast than DPT (Section~\ref{subsubsec:distance_comparison}).
@@ -92,9 +92,9 @@ capture fine detail in depth contrast than DPT (Section~\ref{subsubsec:distance_
 In Section~\ref{subsubsec:var_cal}, it was demonstrated that, when DPT is calibrated using
 only the closest and furthest reference frame, the estimated distances of close pixels are
 underestimated, while those of far pixels are overestimated.
-In an attempt to explain this, a hypothesis was proposed theorising that the true relationship
+In an attempt to explain this, a hypothesis was proposed, theorising that the true relationship
 between DPT outputted disparity and metric disparity follows a non-linear mapping.
-To the best of the knowledge of the author, the literature contains no studies that map
+To the best of the author's knowledge, the literature contains no studies that map
 DPT disparity to metric disparity.
 As such, this relationship should be investigated.
 Besides validating this hypothesis, evidence of non-linearity would give insight into improved
@@ -102,7 +102,7 @@ methods of DPT calibration for more robust predictions.
 
 Additionally, better calibrations may be achieved simply through the implementation of expanded
 referencing for refined calibration.
-Decreasing the distance interval by which references are recorded is likely to show some positive
+Decreasing the distance interval by which references are recorded, is likely to show some positive
 effects on estimate error through minimisation of outlier influence.
 Furthermore, an interesting avenue of study may be the use of multiple references per distance
 interval, where these references are recorded at a variety of positions in the frame spanning its
@@ -137,6 +137,6 @@ for MDE\@.
 Recent years have seen huge advancements across the machine learning space.
 Tasks once constrained by manual resources can now be automated in a faction of the time
 while achieving superior results.
-It is most certain that continued application of the state-of-the-art to conservation efforts
-will produce impactful results, advancing technologies that will support the preservation of
+It is most certain that the continued application of state-of-the-art research to conservation
+practices will produce impactful results, advancing technologies that will support the preservation of
 biodiversity around the world.

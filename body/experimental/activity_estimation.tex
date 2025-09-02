@@ -8,13 +8,13 @@ script adapted from one supplied with the dataset.
 \subsubsection{Formatting}\label{subsubsec:formatting}
 
 For the distance data to be used for density and abundance estimation, it first must be
-formatted and joined with the relevant location and camera trap video metadata as to
+formatted and joined with the relevant location and camera trap video metadata so as to
 satisfy the script's input requirements.
 The final must then be identical in structure to the manually annotated
 detection data supplied with the dataset in CSV formatting containing the columns
-'video\_name', 'time\_in\_place\_(days)', 'effort', 'starting\_date', 'date\_observation',
-'time\_observation', 'year', 'month', 'day', 'hour', 'minute', 'second', 'distance', 'Sample.Label',
-'Effort', 'Region.Label' and 'Area'.
+`video\_name', `time\_in\_place\_(days)', `effort', `starting\_date', `date\_observation',
+`time\_observation', `year', `month', `day', `hour', `minute', `second', `distance', `Sample.Label',
+`Effort', `Region.Label' and `Area'.
 
 \vspace{5mm}
 \textbf{Manual Sample}
@@ -26,7 +26,7 @@ with the corresponding model estimated distances, leaving all other data unchang
 For reasons detailed in Section~\ref{subsubsec:distance_comparison}, a decision was
 made to format the data such as to only overwrite manual distances associated with
 frames capturing a single chimpanzee.
-This gave a 'supplemented' dataframe, where distance estimates originating from
+This gave a `supplemented' dataframe, where distance estimates originating from
 single-chimp frames were model-estimated while those from multi-chimp frames were
 estimated manually.
 Nevertheless, density and abundance estimates based on the supplemented data are still
@@ -36,7 +36,7 @@ distance data in this context.
 \vspace{5mm}
 \textbf{Automated Sample}
 
-When formatting the distance data generated from the automated sample however, a
+When formatting the distance data generated from the automated sample, however, a
 different method was used.
 First, a lookup table was created to hold the metadata associated with each specific
 camera trap video.
@@ -50,4 +50,4 @@ and abundance estimates were then derived using the WCF activity script.
 For each dataframe, the script was adapted to apply appropriate truncation and binning
 to the distance data in order to generate a smooth distance distribution histogram.\cite{distance_samping}
 Preliminary runs of the script were then used to fit several detection functions to
-this histogram, with the best fitting (lowest AIC value) being selected\cite{distance_samping}.
+this histogram, with the best fitting (lowest AIC value) being selected.\cite{distance_samping}
