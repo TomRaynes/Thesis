@@ -37,23 +37,23 @@ used for dense prediction\cite{segmentation_CNN,invariant_CNNs}
 (i.e., the labelling of all pixels in an image), by substituting the encoder with a series of staged
 vision transfor-mers.\cite{vision_transformer,transformer}
 This proves to be beneficial for tasks involving dense prediction (i.e., MDE) as the network retains
-global context of the image and high feature resolution through all transformer stages\cite{dpt,transformer}.
+global context of the image and high feature resolution through all transformer stages.\cite{dpt,transformer}
 This is not the case with convolutional neural networks, where features at progressively higher levels of
 abstraction in the image are captured through repeated down-sampling over convolutional layers, resulting
-in a loss of detail at deeper layers where the context is larger\cite{dpt,invariance_in_CNNs}.
+in a loss of detail at deeper layers where the context is larger.\cite{dpt,invariance_in_CNNs}
 
 \clearpage
 \textbf{Training}
 
 The vision transformer backbone of the network is pretrained with weights obtained using the ImageNet
-dataset while the convolutional decoder weights are randomised\cite{dpt,imagenet}.
+dataset while the convolutional decoder weights are randomised.\cite{dpt,imagenet}
 For the application to MDE in this pipeline, the model is trained on a large aggregate
 dataset of approximately 1.4 million images, leveraging a technique referred to as `zero-shot
 cross dataset transfer'.
 This technique employs loss functions that are compatible with training data obtained using a range
 ground-truth assessment methods (e.g., stereo cameras, lasers, structured-light 3D scanners) with
 differing scales and shifts.
-As a consequence, raw DPT output should be considered as a measure of relative distance\cite{dpt,dpt_training}.
+As a consequence, raw DPT output should be considered as a measure of relative distance.\cite{dpt,dpt_training}
 
 \vspace{5mm}
 \textbf{Metric Calibration}
@@ -152,12 +152,12 @@ is used\cite{HAUCKE2022101536,ransac}.
 Depth Anything is a deep learning model for monocular depth estimation that gives pixel-wise
 metric distance estimates.
 Conceptually, it builds on the DPT framework where a convolutional encoder is substituted for a
-backbone of pre-trained staged vision transformers\cite{dpt,depth_anything}.
+backbone of pre-trained staged vision transformers.\cite{dpt,depth_anything}
 In development, the objective of the researchers was to ``build a foundation model for
-MDE,''\cite{depth_anything} whereby accurate depth estimates are given even in circumstances
-where the model is applied to unseen datasets, i.e., achieving zero-shot performance\cite{zero_shot}.
+MDE'',\cite{depth_anything} whereby accurate depth estimates are given even in circumstances
+where the model is applied to unseen datasets, i.e., achieving zero-shot performance.\cite{zero_shot}
 
-The model uses a DINOv2 encoder initialised with pre-trained weights\cite{dino_v2}; however,
+The model uses a DINOv2 encoder initialised with pre-trained weights;\cite{dino_v2} however,
 the novelty of Depth Anything lies in how it is trained.
 The training methodology leverages an enormous quantity of unlabelled monocular images that are
 automatically labelled with corresponding pixel-wise pseudo-distance estimates.
@@ -174,7 +174,7 @@ is used in this distance sampling study.\cite{depth_anything}
 
 Of important note, for training of the student model, the training data images were artificially
 deformed, introducing perturbations\cite{depth_anything} such as colour distortion and spacial
-distortion using CutMix\cite{cutmix}.
+distortion using CutMix.\cite{cutmix}
 This necessitates that the model be responsive to more complex cues (e.g., geometry, high-level semantics)
 in order to predict distances aligned with the predictions of the teacher model, trained on unperturbed
 data.\cite{depth_anything}
@@ -206,7 +206,7 @@ used as thresholds to filter false positive detections.\cite{bird_classification
 \subsubsection{Segment Anything}
 
 Segment Anything is a promptable general-purpose deep learning model for generating
-pixel-level segmentations of image components\cite{segment_anything}.
+pixel-level segmentations of image components.\cite{segment_anything}
 Images are encoded using a MAE\cite{mae} pre-trained vision transformer encoder which is modified
 to handle high resolution images.\cite{ViT_detection}
 For prompting, a variety of forms are accepted,\cite{segment_anything} namely text, points,
