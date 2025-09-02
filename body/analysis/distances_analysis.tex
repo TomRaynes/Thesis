@@ -40,7 +40,7 @@ each group, giving a visualisation of the spread of the estimates.
 Table~\ref{tab:regression_gradients} shows the gradients of the fitted regression lines
 correlating the averages of all grouped distance estimates with their corresponding manual
 distance estimate for each configuration.
-These individual errors for each of these groups were then calculated.
+The individual errors for each of these groups were then calculated.
 Figure~\ref{fig:mae} shows the change in mean average error for each group while
 Figure~\ref{fig:rmse} shows the change in root mean squared error for each group.
 
@@ -110,7 +110,7 @@ Figure~\ref{fig:rmse} shows the change in root mean squared error for each group
         the ideal (i.e., model=manual). All distances are in units of meters. These graphs show the
         spread of distance estimates at each distance. By inspection, it can be seen that error in
         DPT estimates are generally spread mostly evenly above and below the ideal while Depth
-        Anything estimates tends to be below the ideal. This aligns with the results seen in
+        Anything estimates tend to be below the ideal. This aligns with the results seen in
         Table~\ref{tab:overall_errors}.}
     \label{fig:spread_comparison}
 \end{figure}
@@ -567,7 +567,7 @@ of DPT with both bounding box and segmentation detection methods (Figure~\ref{fi
     \caption{Graph showing the mean average error (MAE) of all distance estimates associated with
         a single camera location with respect to their corresponding manual distance estimates
         using DPT calibrated with a varying number of refrence frames.
-        It is seen that, after approximetely ten reference frame, minimal change in
+        It is seen that, after approximetely ten reference frames, minimal change in
         error is occurring.}
     \label{fig:MAE_var_cal}
 \end{figure}
@@ -602,7 +602,7 @@ On inspection of Figure~\ref{fig:variable_calibration}, calibrations two and fou
 vastly overestimated background depth.
 This shows that, in these cases, the scale of the calibration function is amplified so much as to scale
 the disparity of these background pixels to below the maximum depth disparity (i.e., lower than 1/15)
-resulting in these pixels being capped at the maximum depth of 15.
+resulting in these pixels being capped at the maximum depth of fifteen meters.
 This is reflected in Figure~\ref{fig:variable_calibration}, where large spikes are observed in the errors
 of the associated distance estimates.
 

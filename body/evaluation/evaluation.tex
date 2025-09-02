@@ -41,7 +41,7 @@ boxes while missed detections can be inferred and corresponding bounding boxes p
 using an object tracking algorithm, e.g., DeepSORT\@.\cite{deepsort}
 This approach has already shown impressive results in the biomonitoring space.\cite{detection_pipeline}
 These bounding boxes may then be sampled in correspondence to the
-extracted frames (i.e. frames used for MDE) and then processed with the depth data in an
+extracted frames (i.e., frames used for MDE) and then processed with the depth data in an
 equivalent manner.
 This method will certainly lower the frequency of misses; however, its effect on subsequent
 density and abundance estimates is yet to be seen.
@@ -65,7 +65,7 @@ One might imagine that the pre-processing of distance observation/estimation dat
 density and abundance estimation script would also constitute somewhat of a bottleneck (i.e., truncation,
 binning, calculating wellness of fit).
 While this does still require some manual human input, it is generally the view of practitioners that
-the primary contemporary concern is to overcome the distance estimation bottleneck, as the labour
+the primary concern is to overcome the distance estimation bottleneck, as the labour
 requirements of pre-processing are but a fraction of those required for distance estimation.
 
 \subsection{Optimising Estimates}
@@ -105,14 +105,14 @@ referencing for refined calibration.
 Decreasing the distance interval by which references are recorded, is likely to show some positive
 effects on estimate error through minimisation of outlier influence.
 Furthermore, an interesting avenue of study may be the use of multiple references per distance
-interval, where these references are recorded at a variety of positions in the frame spanning its
+interval, where these references are recorded at a variety of positions in the frame, spanning its
 width.
 
 Having said this, the caveat here is that, while this may produce better estimates, the
 aforementioned calibration frame preparation bottleneck would become expanded.
 Consequently, these factors must be balanced accordingly to some degree; although, with the current
 capabilities of monocular depth estimation technology, it follows that optimised calibrations
-are most desirable as to minimise the error of distance estimates.
+are most desirable so as to minimise the error of distance estimates.
 
 \subsection{Closing Remarks}
 
